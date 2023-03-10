@@ -1,2 +1,2 @@
 # Car_Dealership_Group2_430
-Car dealership project that has a user interface for viewing and renting cars, and booking test drives, alongside an admin panel.
+A car dealership website featuring a user interface for viewing and renting cars, booking of test drives, and an admin panel.
