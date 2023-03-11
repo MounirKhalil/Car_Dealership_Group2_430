@@ -7,7 +7,8 @@ A car dealership website featuring a user interface for viewing and renting cars
 1. create table of contents
 2. add library requirements with versions
 3. flush out pages descriptions
-4. add license mit
+4. add features in functionality
+5. add license mit
 <hr>
 
 ## Getting Started
@@ -44,11 +45,20 @@ cd frontend
 npm start
 ```
 
+## Test backend:
+
+The backend can be tested by adding a print statement to the sign up function and then issuing this command:
+
+```
+curl -X POST -H "Content-Type: application/json" -d '{"email": "user@example.com", "password": "password123"}' http://localhost:5000/signup
+
+```
+
 ### This should automatically open the website in your browser at http://localhost:3000.
 
 ## Functionality
 
-The Car Dealership Website allows users to view and rent cars, book test drives, and allows admins to manage cars and test drives. Here are some of the features:
+The Car Dealership Website allows users to view and rent cars, book test drives, and allows admins to manage cars and test drives. Here are some of the features: ...
 
 ## Home Page
 
