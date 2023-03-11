@@ -42,6 +42,7 @@ python app.py
 
 ```
 cd frontend
+cd dealership
 npm start
 ```
 
