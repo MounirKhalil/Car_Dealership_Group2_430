@@ -90,6 +90,8 @@ def get_cars():
             'price': car['price'],
             'image': car['image']
         })
+    if len(cars) == 0:
+        return jsonify({'error': 'No cars found in database'})
     return jsonify(cars)
 
 if __name__ == '__main__':
