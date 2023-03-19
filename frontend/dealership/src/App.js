@@ -7,6 +7,9 @@ import Landing from "./components/Landing.js";
 import AdminPanel from "./components/AdminPanel";
 import UserContext from "./UserContext";
 
+import CarList from "./components/CarList";
+
+
 function App() {
   const [user, setUser] = useState(null);
 
@@ -60,7 +63,7 @@ function App() {
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ user, handleSignIn, handleSignOut }}>
-        <Home />
+        <CarList />
         <Routes>
           <Route
             path="/signin"

@@ -1,0 +1,12 @@
+.car-list {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 16px;
+  }
+  
+  .car-card {
+    flex: 0 0 300px;
+    margin-right: 16px;
+  }
