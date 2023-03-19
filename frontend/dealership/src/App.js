@@ -58,7 +58,6 @@ function App() {
   };
 
   return (
-    // <SignIn />
     <BrowserRouter>
       <UserContext.Provider value={{ user, handleSignIn, handleSignOut }}>
         <Home />
