@@ -30,7 +30,7 @@ const cars = [
     id: 4,
     make: "Chevrolet",
     model: "Corvette",
-    year: 2022,
+    year: 2022 ,
     price: 80000,
     image: "",
   },
