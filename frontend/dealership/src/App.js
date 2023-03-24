@@ -64,15 +64,16 @@ function App() {
         <Routes>
           <Route
             path="/signin"
-            element={SignIn}
+            element={<SignIn />}
             render={() => <SignUp handleSignUp={handleSignIn} />}
           />
           <Route
             path="/signup"
+            element={<SignUp />}
             render={() => <SignUp handleSignUp={handleSignUp} />}
           />
-          <Route path="/admin_panel" element={AdminPanel} />
-          <Route path="/" element={Landing} />
+          <Route path="/admin_panel" element={<AdminPanel />} />
+          <Route path="/" element={<Landing />} />
         </Routes>
       </UserContext.Provider>
     </BrowserRouter>
