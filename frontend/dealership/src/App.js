@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from "./components/signin/SignIn";
 import SignUp from "./components/SignUp";
 import NavBar from "./components/navbar/NavBar";
-import Landing from "./components/Landing.js";
+import Landing from "./components/landing/Landing";
 import AdminPanel from "./components/AdminPanel";
 import UserContext from "./UserContext";
 

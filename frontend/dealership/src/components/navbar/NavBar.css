@@ -8,6 +8,8 @@
     position: sticky;
     top: 0;
     z-index: 20;
+    padding-left: 6vw;
+    padding-right: 6vw;
   }
   
   .nav-container {

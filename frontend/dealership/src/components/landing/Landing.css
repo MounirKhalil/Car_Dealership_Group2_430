@@ -18,7 +18,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 5%;
   }
   
   .hero {
@@ -91,4 +90,8 @@
     padding-right: 1%;
     max-width: 10%;
     height: auto;
+  }
+  .cars-text{
+    color: #2196f5;
+    font-size: larger;
   }
