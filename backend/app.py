@@ -77,6 +77,22 @@ def sign_up():
 
     return jsonify({'success': True})
 
+@app.route('/cars', methods=['GET'])
+def get_cars():
+    #This function gets all the cars from the database and returns them as JSON object.
+    cars = []
+    for car in mongo.db.cars.find():
+        cars.append({
+            'id': str(car['_id']),
+            'make': car['make'],
+            'model': car['model'],
+            'year': car['year'],
+            'price': car['price'],
+            'image': car['image']
+        })
+    if len(cars) == 0:
+        return jsonify({'error': 'No cars found in database'})
+    return jsonify(cars)
 
 if __name__ == '__main__':
     app.run(debug=True)
