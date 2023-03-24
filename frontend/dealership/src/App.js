@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SignIn from "./components/SignIn";
+import SignIn from "./components/signin/SignIn";
 import SignUp from "./components/SignUp";
-import Home from "./components/Home";
-import Landing from "./components/Landing.js";
+import NavBar from "./components/navbar/NavBar";
+import Landing from "./components/landing/Landing";
 import AdminPanel from "./components/AdminPanel";
 import UserContext from "./UserContext";
 
@@ -60,7 +60,7 @@ function App() {
   return (
     <BrowserRouter>
       <UserContext.Provider value={{ user, handleSignIn, handleSignOut }}>
-        <Home />
+        <NavBar />
         <Routes>
           <Route
             path="/signin"
