@@ -7,7 +7,8 @@ from datetime import datetime, timedelta
 app = Flask(__name__)
 
 
-app.config['MONGO_DBNAME'] = 'mydatabase'
+app.config['MONGO_DBNAME'] = 'website_data'
+app.config['SECRET_KEY'] = 'test'
 
 """
 Here we need to place the url of the database in an .env variable for better security latter following these steps:
@@ -23,9 +24,25 @@ Replace <username> with the username you created, <password> with the password y
 
 """
 
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/mydatabase'
+#app.config['MONGO_URI'] = 'mongodb://localhost:27017/mydatabase'
+app.config['MONGO_URI'] = 'mongodb+srv://car_dealer:qWWVneQznCWRirGx@cluster0.laajaef.mongodb.net/website_data' 
+# need to make .env file and verify it's working
 
 mongo = PyMongo(app)
+
+
+class User:
+    def __init__(self, first_name, last_name, email, hashed_password, mobile):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.email = email
+        self.hashed_password = hashed_password
+        self.mobile = mobile
+
+new_u = User('mounir', 'khalil', 'mmk113@hi.bye', 'defewfewf', '351654')
+mongo.db.users.insert_one(new_u)
+#print(mongo.db.users.find_one({'email': 'ss'}))
+
 
 
 @app.route('/signin', methods=['POST'])
@@ -37,12 +54,12 @@ def sign_in():
     email = request.json['email']
     password = request.json['password']
 
-    users_collection = mongo.db.users
+    users_collection = mongo.db.users         
 
     user = users_collection.find_one({'email': email})
 
     if user:
-        hashed_password = user['password']
+        hashed_password = user['hashed_password']
         if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
             if user.get('admin'):
                 token = jwt.encode({
@@ -61,8 +78,12 @@ def sign_up():
     This function handles user registration. It checks if the user already exists and adds a new user
     to the database if they don't exist.
     """
+
+    first_name = request.json['first_name']
+    last_name = request.json['last_name']
     email = request.json['email']
     password = request.json['password']
+    mobile = request.json['mobile']
 
     users_collection = mongo.db.users
 
@@ -73,7 +94,9 @@ def sign_up():
 
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-    users_collection.insert_one({'email': email, 'password': hashed_password})
+    new_user = User(first_name, last_name, email, hashed_password, mobile)
+
+    users_collection.insert_one(new_user)
 
     return jsonify({'success': True})
 
