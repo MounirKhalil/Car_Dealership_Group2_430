@@ -1,1 +1,3 @@
-our_venv
+./our_venv
+./.idea
+./_pycache_
