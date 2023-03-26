@@ -1,0 +1,51 @@
+.form-container {
+    width: 50vw;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 80%; /* Add this line to limit the form width */
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .submit-button {
+    width: fit-content;
+    align-self: center;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+  }
+  
+  .submit-button:hover {
+    background-color: #0069d9;
+  }
+  
+  .submit-button:focus {
+    outline: none;
+  }
