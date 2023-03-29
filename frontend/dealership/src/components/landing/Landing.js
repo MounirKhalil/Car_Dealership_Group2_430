@@ -6,6 +6,9 @@ import brand2 from "../../img/brand2.png";
 import brand3 from "../../img/brand3.png";
 import brand4 from "../../img/brand4.png";
 import brand5 from "../../img/brand5.png";
+import brand6 from "../../img/brand6.png";
+import brand7 from "../../img/brand7.png";
+import brand8 from "../../img/brand8.png";
 
 function Landing() {
   return (
@@ -36,13 +39,67 @@ function Landing() {
           </div>
         </section>
         <div>
-          <h2 className="car-brand-title">Car Brands</h2>
           <div className="car-brands">
-            <img src={brand1} alt="Brand 1" className="car-brand" />
-            <img src={brand2} alt="Brand 2" className="car-brand" />
-            <img src={brand3} alt="Brand 3" className="car-brand" />
-            <img src={brand4} alt="Brand 4" className="car-brand" />
-            <img src={brand5} alt="Brand 5" className="car-brand" />
+            <section className="banner">
+              <article className="slides">
+                <div className="slide">
+                  <ul className="images">
+                    <li>
+                      <img src={brand1} className="image" />
+                    </li>
+                    <li>
+                      <img src={brand2} className="image" />
+                    </li>
+                    <li>
+                      <img src={brand3} className="image" />
+                    </li>
+                    <li>
+                      <img src={brand4} className="image" />
+                    </li>
+                    <li>
+                      <img src={brand5} className="image" />
+                    </li>
+                    <li>
+                      <img src={brand6} className="image" />
+                    </li>
+                    <li>
+                      <img src={brand7} className="image" />
+                    </li>
+                    <li>
+                      <img src={brand8} className="image" />
+                    </li>
+                  </ul>
+                </div>
+                <div className="slide">
+                  <ul className="images">
+                    <li>
+                      <img src={brand1} className="image" />
+                    </li>
+                    <li>
+                      <img src={brand2} className="image" />
+                    </li>
+                    <li>
+                      <img src={brand3} className="image" />
+                    </li>
+                    <li>
+                      <img src={brand4} className="image" />
+                    </li>
+                    <li>
+                      <img src={brand5} className="image" />
+                    </li>
+                    <li>
+                      <img src={brand6} className="image" />
+                    </li>
+                    <li>
+                      <img src={brand7} className="image" />
+                    </li>
+                    <li>
+                      <img src={brand8} className="image" />
+                    </li>
+                  </ul>
+                </div>
+              </article>
+            </section>
           </div>
         </div>
       </main>
