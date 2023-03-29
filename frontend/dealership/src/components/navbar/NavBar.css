@@ -1,5 +1,5 @@
 .navbar {
-    background-color: white;
+    background-color: whitesmoke;
     height: 80px;
     display: flex;
     justify-content: center;
@@ -10,6 +10,7 @@
     z-index: 20;
     padding-left: 6vw;
     padding-right: 6vw;
+
   }
   
   .nav-container {
