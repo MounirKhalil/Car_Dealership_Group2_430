@@ -2,3 +2,4 @@ Flask
 flask-pymongo
 bcrypt
 jwt
+python-dotenv
