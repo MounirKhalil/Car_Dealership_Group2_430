@@ -3,46 +3,22 @@ from flask_pymongo import PyMongo
 import bcrypt
 import jwt
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
+import os
+import re
+
+load_dotenv()
 
 app = Flask(__name__)
 
-
 app.config['MONGO_DBNAME'] = 'website_data'
-app.config['SECRET_KEY'] = 'test'
-
-"""
-Here we need to place the url of the database in an .env variable for better security latter following these steps:
-Sign up for a MongoDB Atlas account at https://www.mongodb.com/cloud/atlas.
-Create a new project and a new cluster in your MongoDB Atlas account.
-Under "Security", click "Database Access" and add a new database user with the necessary privileges.
-Under "Network Access", click "Add IP Address" and add your current IP address or allow access from anywhere (0.0.0.0/0).
-Under "Clusters", click "Connect" and select "Connect your application".
-Select "Python" as the driver and copy the connection string.
-Update your Flask application's MongoDB connection string to the connection string from MongoDB Atlas.
-MONGO_URI = 'mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>?retryWrites=true&w=majority'
-Replace <username> with the username you created, <password> with the password you created, <cluster> with the name of your cluster, and <database> with the name of the database you want to use.
-
-"""
-
-#app.config['MONGO_URI'] = 'mongodb://localhost:27017/mydatabase'
-app.config['MONGO_URI'] = 'mongodb+srv://car_dealer:qWWVneQznCWRirGx@cluster0.laajaef.mongodb.net/website_data' 
-# need to make .env file and verify it's working
+app.config['MONGO_URI'] = os.getenv('MONGO_URI')
 
 mongo = PyMongo(app)
 
-
-class User:
-    def __init__(self, first_name, last_name, email, hashed_password, mobile):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.email = email
-        self.hashed_password = hashed_password
-        self.mobile = mobile
-
-new_u = User('mounir', 'khalil', 'mmk113@hi.bye', 'defewfewf', '351654')
-mongo.db.users.insert_one(new_u)
-#print(mongo.db.users.find_one({'email': 'ss'}))
-
+####################################################################
+################  SIGN IN AND SIGN UP SECTION ######################
+####################################################################
 
 
 @app.route('/signin', methods=['POST'])
@@ -54,18 +30,18 @@ def sign_in():
     email = request.json['email']
     password = request.json['password']
 
-    users_collection = mongo.db.users         
+    users_collection = mongo.db.users
 
     user = users_collection.find_one({'email': email})
 
     if user:
-        hashed_password = user['hashed_password']
+        hashed_password = user['password']
         if bcrypt.checkpw(password.encode('utf-8'), hashed_password):
             if user.get('admin'):
                 token = jwt.encode({
                     'user': email,
                     'exp': datetime.utcnow() + timedelta(minutes=30)
-                }, app.config['SECRET_KEY'])
+                }, os.getenv('SECRET_KEY'))
                 return jsonify({'token': token.decode('utf-8'), 'admin': True})
             else:
                 return jsonify({'error': 'You do not have permission to access the admin panel'})
@@ -75,30 +51,69 @@ def sign_in():
 @app.route('/signup', methods=['POST'])
 def sign_up():
     """
-    This function handles user registration. It checks if the user already exists and adds a new user
-    to the database if they don't exist.
+    This function handles user registration. It checks if the user already exists,
+    checks if the password meets the minimum strength requirements (minimum 8 characters
+    with at least one uppercase letter, one lowercase letter, one digit, and one special
+    character), and adds a new user to the database if they don't exist.
     """
-
     first_name = request.json['first_name']
     last_name = request.json['last_name']
     email = request.json['email']
     password = request.json['password']
     mobile = request.json['mobile']
+    admin = request.json['admin']
 
+    # Check if user already exists
     users_collection = mongo.db.users
-
     existing_user = users_collection.find_one({'email': email})
-
     if existing_user:
         return jsonify({'error': 'User already exists'})
 
+    # Check password length
+    if not (len(password) >= 8 
+    and re.search(r'[A-Z]', password)
+    and re.search(r'[a-z]', password)
+    and re.search(r'\d', password)
+    and re.search(r'[!@#$%^&*(),.?":{}|<>]', password)):
+        return jsonify({'error': 'Password must be at least 8 characters and contain at least'
+                        'one uppercase letter, one lowercase letter, one digit, and one special'
+                        'character'})
+
+    # Hash the password and insert user into the database
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-
-    new_user = User(first_name, last_name, email, hashed_password, mobile)
-
-    users_collection.insert_one(new_user)
+    users_collection.insert_one({
+        'first_name': first_name,
+        'last_name': last_name,
+        'email': email,
+        'password': hashed_password,
+        'mobile': mobile,
+        'admin': admin
+    })
 
     return jsonify({'success': True})
+
+
+####################################################################
+###########################  CARS SECTION ##########################
+####################################################################
+
+
+@app.route('/cars', methods=['GET'])
+def get_cars():
+    # This function gets all the cars from the database and returns them as JSON object.
+    cars = []
+    for car in mongo.db.cars.find():
+        cars.append({
+            'id': str(car['_id']),
+            'make': car['make'],
+            'model': car['model'],
+            'year': car['year'],
+            'price': car['price'],
+            'image': car['image']
+        })
+    if len(cars) == 0:
+        return jsonify({'error': 'No cars found in database'})
+    return jsonify(cars)
 
 
 if __name__ == '__main__':
