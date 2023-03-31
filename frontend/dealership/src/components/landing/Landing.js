@@ -27,21 +27,9 @@ function Landing() {
           </div>
           <img id="hero-image" src={hero_section_img} alt="Hero Section Car" />
         </section>
-        <section className="features">
-          <div className="feature">
-            <h3>Large Inventory</h3>
-            <p>We have a large selection of new and used cars. </p>
-          </div>
-          <div className="feature">
-            <h3>Great Prices</h3>
-            <p>We offer competitive pricing on all our vehicles.</p>
-          </div>
-          <div className="feature">
-            <h3>Expert Service</h3>
-            <p>Our service department is staffed with certified technicians.</p>
-          </div>
-        </section>
+       
         <div>
+          <div className="slids-container">
           <div className="car-brands">
             <section className="banner">
               <article className="slides">
@@ -105,6 +93,21 @@ function Landing() {
             </section>
           </div>
         </div>
+          </div>
+          <section className="features">
+          <div className="feature">
+            <h3>Large Inventory</h3>
+            <p>We have a large selection of new and used cars. </p>
+          </div>
+          <div className="feature">
+            <h3>Great Prices</h3>
+            <p>We offer competitive pricing on all our vehicles.</p>
+          </div>
+          <div className="feature">
+            <h3>Expert Service</h3>
+            <p>Our service department is staffed with certified technicians.</p>
+          </div>
+        </section>
         <section className="CardSection">
           <h3>Book a test drive following these 3 steps</h3>
           <div>
