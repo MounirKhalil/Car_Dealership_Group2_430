@@ -9,6 +9,9 @@ import brand5 from "../../img/brand5.png";
 import brand6 from "../../img/brand6.png";
 import brand7 from "../../img/brand7.png";
 import brand8 from "../../img/brand8.png";
+import calendericon from "../../img/calendericon.png";
+import caricon from "../../img/caricon.png";
+import locationicon from "../../img/locationicon.png";
 
 function Landing() {
   return (
@@ -24,21 +27,9 @@ function Landing() {
           </div>
           <img id="hero-image" src={hero_section_img} alt="Hero Section Car" />
         </section>
-        <section className="features">
-          <div className="feature">
-            <h3>Large Inventory</h3>
-            <p>We have a large selection of new and used cars. </p>
-          </div>
-          <div className="feature">
-            <h3>Great Prices</h3>
-            <p>We offer competitive pricing on all our vehicles.</p>
-          </div>
-          <div className="feature">
-            <h3>Expert Service</h3>
-            <p>Our service department is staffed with certified technicians.</p>
-          </div>
-        </section>
+       
         <div>
+          <div className="slids-container">
           <div className="car-brands">
             <section className="banner">
               <article className="slides">
@@ -102,6 +93,43 @@ function Landing() {
             </section>
           </div>
         </div>
+          </div>
+          <section className="features">
+          <div className="feature">
+            <h3>Large Inventory</h3>
+            <p>We have a large selection of new and used cars. </p>
+          </div>
+          <div className="feature">
+            <h3>Great Prices</h3>
+            <p>We offer competitive pricing on all our vehicles.</p>
+          </div>
+          <div className="feature">
+            <h3>Expert Service</h3>
+            <p>Our service department is staffed with certified technicians.</p>
+          </div>
+        </section>
+        <section className="CardSection">
+          <h3>Book a test drive following these 3 steps</h3>
+          <div>
+            <ul className="ThreeCards">
+              <li className="Card">
+                <img src={locationicon} className="CardImage" />
+                <h4>Choose location</h4>
+                <p>Choose location of desired dealership branch</p>
+              </li>
+              <li className="Card">
+                <img src={calendericon} className="CardImage" />
+                <h4>Pick a date</h4>
+                <p>Pick one of the available dates at your convenience</p>
+              </li>
+              <li className="Card">
+                <img src={caricon} className="CardImage" />
+                <h4>Select Car</h4>
+                <p>Select one of many available cars you weish to test drive</p>
+              </li>
+            </ul>
+          </div>
+        </section>
       </main>
     </div>
   );
