@@ -1,0 +1,34 @@
+.admin-panel-container {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+  }
+  
+  .sidebar {
+    background-color: whitesmoke;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    padding: 2vw;
+  }
+  
+  .sidebar-ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .sidebar-li {
+    text-align: left;
+    margin-bottom: 2vh;
+    height: calc(100% / 4);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+  
+  .sidebar-li:hover {
+    cursor: pointer;
+    background-color: white;
+    width: 100%;
+  }
