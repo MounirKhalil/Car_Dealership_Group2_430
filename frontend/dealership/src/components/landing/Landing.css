@@ -1,162 +1,288 @@
 .Landing {
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow-x: hidden;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+}
 
-  }
-  
+main {
+  background-color: whitesmoke;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-  main {
-    background-color: whitesmoke;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .hero {
-    height: 65vh;
-    width: 90vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .hero-text {
-    flex: 1;
-    max-width: 500px;
-    padding-right: 5%;
-  }
-  
-  .hero-text h2 {
-    font-size: 3vw;
-    margin-bottom: 2%;
-  }
-  
-  .hero-text p {
-    font-size: 1.5vw;
-    margin-bottom: 4%;
-  }
-  
-  #hero-image {
-    padding-left:2.5%;
-    width: 50%;
-    flex-shrink: 1;
-  }
-  
-  .features {
-    width: 100vw;
-    background-color: white;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .feature {
-    width: 15vw;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .feature h3 {
+.hero {
+  height: 65vh;
+  width: 90vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    margin-bottom: 1%;
-  }
-  
-  .feature p {
-    text-align: center;
-  }
-  
- 
-  .cars-text{
-    color: #2196f5;
-    font-size: larger;
-  }
+.hero-text {
+  flex: 1;
+  max-width: 500px;
+  padding-right: 5%;
+}
 
+.hero-text h2 {
+  font-size: 3vw;
+  margin-bottom: 2%;
+}
 
-  
-  .banner {
-    background-color: whitesmoke;
-    width: 100%;
-    overflow: hidden;
-  }
-  .slids-container{
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
+.hero-text p {
+  font-size: 1.5vw;
+  margin-bottom: 4%;
+}
 
-  .slides {
-    display: flex;
-    width: 100%;
-    animation: bannermove 16s linear infinite;
-  }
-  
-  
-  .slide {
-    width: 100%;
-  }
-  
-  .images {
-    display: flex;
-    list-style-type: none;
-    padding-left: 0;
-    margin: 0;
-  }
-  
-  .image {
-    height: 8vh;
-    padding-right: 6vw;
-    padding-left: 6vw;
-  }
-  
-  .CardSection h3{
-    padding-top: 5vh;
-    margin-bottom: 50px;
-  }
+#hero-image {
+  padding-left: 2.5%;
+  width: 70%;
+  flex-shrink: 1;
+}
 
-  .ThreeCards{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    list-style-type: none;
-  }
-  .CardSection{
-    background-color: white;
-    width: 100vw;
-  }
-  .Card{
-    padding: 1vw;
-  }
-  .CardImage:hover{
-    background-color: #4ba8f4;
-  }
-  .Card h4{
-    font-size: 1.5vw;
-    text-align: center;
-  }
+.features {
+  width: 100vw;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
 
-  .Card p{
-    font-size: 1vw;
-    text-align: center;
+.feature {
+  width: 15vw;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feature h3 {
+  margin-bottom: 1%;
+}
+
+.feature p {
+  text-align: center;
+}
+
+.cars-text {
+  color: #2196f5;
+  font-size: larger;
+}
+
+.banner {
+  background-color: whitesmoke;
+  width: 100%;
+  overflow: hidden;
+}
+.slids-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.slides {
+  display: flex;
+  width: 100%;
+  animation: bannermove 16s linear infinite;
+}
+
+.slide {
+  width: 100%;
+}
+
+.images {
+  display: flex;
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.image {
+  height: 8vh;
+  padding-right: 6vw;
+  padding-left: 6vw;
+}
+
+.CardSection h3 {
+  padding-top: 5vh;
+  margin-bottom: 50px;
+}
+
+.ThreeCards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style-type: none;
+}
+.CardSection {
+  background-color: white;
+  width: 100vw;
+}
+.Card {
+  padding: 1vw;
+}
+.CardImage:hover {
+  background-color: #4ba8f4;
+}
+.Card h4 {
+  font-size: 1.5vw;
+  text-align: center;
+}
+
+.Card p {
+  font-size: 1vw;
+  text-align: center;
+}
+
+.CardImage {
+  height: 12.5vh;
+  padding: 1vw;
+  border-radius: 15%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes bannermove {
+  from {
+    transform: translateX(0);
   }
 
-  .CardImage{
-    height: 12.5vh;
-    padding: 1vw;
-    border-radius: 15%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); 
+  to {
+    transform: translateX(-50%);
   }
-  
-  @keyframes bannermove {
-    from {
-      transform: translateX(0);
-    }
-    
-    to {
-      transform: translateX(-50%);
-    }
-  }
+}
+
+.DealsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+}
+
+.DealsHero {
+  justify-content: center;
+  align-items: center;
+  flex: 0.5;
+}
+
+.DealsHeroImage {
+  justify-content: center;
+  align-items: center;
+  flex: 0.5;
+  height: 50vh;
+}
+
+.DealsSection {
+  flex: 0.5;
+  display: flex;
+  /* justify-content: left; */
+  align-items: left;
+  flex-direction: column;
+}
+
+.DealsSection h3 {
+  font-size: 40px;
+  text-align: left;
+  justify-content: left;
+}
+
+.DealsSection h4 {
+  font-size: 1.3vw;
+  text-align: center;
+}
+
+.DealsSection p {
+  font-size: 1.05vw;
+  text-align: center;
+}
+
+.FourDeals {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.Deal {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  padding: 0px;
+}
+
+.DealImage {
+  height: 7.25vh;
+  padding: 0.5vw;
+  border-radius: 25%;
+  background-color: white;
+  margin: 10px;
+}
+
+.DealText {
+  display: "flex";
+  align-items: "center";
+}
+
+.DealText h4 {
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.DealText p {
+  margin-top: 0;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.testimonials-container {
+  width: 100vw;
+  background-color: white;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.testimonial-card {
+  color: black;
+  margin-top: 4vh;
+  margin-bottom: 4vh;
+  margin: 20px;
+  border: 1px solid #ccc;
+  width: 60vh;
+  padding: 1vw;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.testimonial-card:hover {
+  background-color: #2196f5;
+  color: white;
+}
+
+.icon-container {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.content h3 {
+  margin-top: 0;
+  font-size: 28px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.content h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bolder;
+  font-family: sans-serif;
+}
+
+.content p {
+  margin-bottom: 0;
+  font-size: 18px;
+}

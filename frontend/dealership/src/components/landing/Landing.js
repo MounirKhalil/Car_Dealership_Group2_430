@@ -12,8 +12,29 @@ import brand8 from "../../img/brand8.png";
 import calendericon from "../../img/calendericon.png";
 import caricon from "../../img/caricon.png";
 import locationicon from "../../img/locationicon.png";
+import carmap from "../../img/car_map.png";
+import pocket from "../../img/pocket.png";
+import driver from "../../img/driver.png";
+import hour from "../../img/hour.png";
+import phone from "../../img/phone.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faBriefcase } from "@fortawesome/free-solid-svg-icons";
 
 function Landing() {
+  const testimonials = [
+    {
+      name: "Mounir Khalil",
+      title: "Formula One Champion",
+      imageSrc: "/path/to/image1.jpg",
+      text: '"My recent experience with Car&Go was exceptional, their team went above and beyond to find the perfect car for my needs."',
+    },
+    {
+      name: "Islam Fares",
+      title: "Founder and CEO of Fares Technologies",
+      imageSrc: "/path/to/image2.jpg",
+      text: '"I was thoroughly impressed with the high-quality inventory and professional service provided by Car&Go."',
+    },
+  ];
   return (
     <div className="Landing">
       <main className="App">
@@ -27,74 +48,74 @@ function Landing() {
           </div>
           <img id="hero-image" src={hero_section_img} alt="Hero Section Car" />
         </section>
-       
+
         <div>
           <div className="slids-container">
-          <div className="car-brands">
-            <section className="banner">
-              <article className="slides">
-                <div className="slide">
-                  <ul className="images">
-                    <li>
-                      <img src={brand1} className="image" />
-                    </li>
-                    <li>
-                      <img src={brand2} className="image" />
-                    </li>
-                    <li>
-                      <img src={brand3} className="image" />
-                    </li>
-                    <li>
-                      <img src={brand4} className="image" />
-                    </li>
-                    <li>
-                      <img src={brand5} className="image" />
-                    </li>
-                    <li>
-                      <img src={brand6} className="image" />
-                    </li>
-                    <li>
-                      <img src={brand7} className="image" />
-                    </li>
-                    <li>
-                      <img src={brand8} className="image" />
-                    </li>
-                  </ul>
-                </div>
-                <div className="slide">
-                  <ul className="images">
-                    <li>
-                      <img src={brand1} className="image" />
-                    </li>
-                    <li>
-                      <img src={brand2} className="image" />
-                    </li>
-                    <li>
-                      <img src={brand3} className="image" />
-                    </li>
-                    <li>
-                      <img src={brand4} className="image" />
-                    </li>
-                    <li>
-                      <img src={brand5} className="image" />
-                    </li>
-                    <li>
-                      <img src={brand6} className="image" />
-                    </li>
-                    <li>
-                      <img src={brand7} className="image" />
-                    </li>
-                    <li>
-                      <img src={brand8} className="image" />
-                    </li>
-                  </ul>
-                </div>
-              </article>
-            </section>
+            <div className="car-brands">
+              <section className="banner">
+                <article className="slides">
+                  <div className="slide">
+                    <ul className="images">
+                      <li>
+                        <img src={brand1} className="image" />
+                      </li>
+                      <li>
+                        <img src={brand2} className="image" />
+                      </li>
+                      <li>
+                        <img src={brand3} className="image" />
+                      </li>
+                      <li>
+                        <img src={brand4} className="image" />
+                      </li>
+                      <li>
+                        <img src={brand5} className="image" />
+                      </li>
+                      <li>
+                        <img src={brand6} className="image" />
+                      </li>
+                      <li>
+                        <img src={brand7} className="image" />
+                      </li>
+                      <li>
+                        <img src={brand8} className="image" />
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="slide">
+                    <ul className="images">
+                      <li>
+                        <img src={brand1} className="image" />
+                      </li>
+                      <li>
+                        <img src={brand2} className="image" />
+                      </li>
+                      <li>
+                        <img src={brand3} className="image" />
+                      </li>
+                      <li>
+                        <img src={brand4} className="image" />
+                      </li>
+                      <li>
+                        <img src={brand5} className="image" />
+                      </li>
+                      <li>
+                        <img src={brand6} className="image" />
+                      </li>
+                      <li>
+                        <img src={brand7} className="image" />
+                      </li>
+                      <li>
+                        <img src={brand8} className="image" />
+                      </li>
+                    </ul>
+                  </div>
+                </article>
+              </section>
+            </div>
           </div>
         </div>
-          </div>
-          <section className="features">
+        <section className="features">
           <div className="feature">
             <h3>Large Inventory</h3>
             <p>We have a large selection of new and used cars. </p>
@@ -130,6 +151,75 @@ function Landing() {
             </ul>
           </div>
         </section>
+        <div className="DealsContainer">
+          <div className="DealsHero">
+            <img src={carmap} className="DealsHeroImage" />
+          </div>
+          <section className="DealsSection">
+            <h3>Drive in style for less with our rental deals</h3>
+            <ul className="FourDeals">
+              <li className="Deal">
+                <img src={pocket} className="DealImage" />
+                <div className="DealText">
+                  <h4>Best price (Source: Trust Us)</h4>
+                  <p>
+                    Find a lower price and you will have the difference totally
+                    refunded
+                  </p>
+                </div>
+              </li>
+              <li className="Deal">
+                <img src={driver} className="DealImage" />
+                <div className="DealText">
+                  <h4>Expert driver</h4>
+                  <p>
+                    Need a driver? Our expert drivers are ready to assist you
+                  </p>
+                </div>
+              </li>
+              <li className="Deal">
+                <img src={hour} className="DealImage" />
+                <div className="DealText">
+                  <h4>24-hour car delivery</h4>
+                  <p>
+                    We are ready to direclty deliver your car at anytime, day
+                    and night.
+                  </p>
+                </div>
+              </li>
+              <li className="Deal">
+                <img src={phone} className="DealImage" />
+                <div className="DealText">
+                  <h4>24/7 technical assistance</h4>
+                  <p>Need help? Contact Car&Go, we are always available!</p>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </div>
+
+        <div className="testimonials-container">
+          <div className="testimonial-card">
+            <div className="icon-container">
+              <FontAwesomeIcon icon={faUser} />
+            </div>
+            <div className="content">
+              <h3>{testimonials[0].name}</h3>
+              <h4>{testimonials[0].title}</h4>
+              <p>{testimonials[0].text}</p>
+            </div>
+          </div>
+          <div className="testimonial-card">
+            <div className="icon-container">
+              <FontAwesomeIcon icon={faBriefcase} />
+            </div>
+            <div className="content">
+              <h3>{testimonials[1].name}</h3>
+              <h4>{testimonials[1].title}</h4>
+              <p>{testimonials[1].text}</p>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   );
