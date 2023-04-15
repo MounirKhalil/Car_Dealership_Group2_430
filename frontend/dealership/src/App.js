@@ -4,7 +4,7 @@ import SignIn from "./components/signin/SignIn";
 import SignUp from "./components/SignUp";
 import NavBar from "./components/navbar/NavBar";
 import Landing from "./components/landing/Landing";
-import AdminPanel from "./components/AdminPanel";
+import AdminPanel from "./components/admin/landing/AdminPanel";
 import UserContext from "./UserContext";
 
 function App() {
@@ -72,7 +72,10 @@ function App() {
             element={<SignUp />}
             render={() => <SignUp handleSignUp={handleSignUp} />}
           />
-          <Route path="/admin_panel" element={<AdminPanel />} />
+          <Route path="/admin" element={<AdminPanel />}>
+            {/* <Route path="/admin/add-car-listing" element={<CarAddingForm />} /> */}
+          </Route>
+
           <Route path="/" element={<Landing />} />
         </Routes>
       </UserContext.Provider>

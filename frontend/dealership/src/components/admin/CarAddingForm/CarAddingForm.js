@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./CarAddingForm.css";
 
 function CarAddingForm(props) {
   // A state variable to store the car object
