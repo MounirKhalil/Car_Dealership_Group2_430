@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
 import re
+from flask_cors import CORS, cross_origin
 
 load_dotenv()
 
@@ -13,6 +14,7 @@ app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'website_data'
 app.config['MONGO_URI'] = os.getenv('MONGO_URI')
+CORS(app)
 
 mongo = PyMongo(app)
 
@@ -42,9 +44,13 @@ def sign_in():
                     'user': email,
                     'exp': datetime.utcnow() + timedelta(minutes=30)
                 }, os.getenv('SECRET_KEY'))
-                return jsonify({'token': token.decode('utf-8'), 'admin': True})
+                return jsonify({'id':  str(user['_id']), 'token': token, 'admin': True})
             else:
-                return jsonify({'error': 'You do not have permission to access the admin panel'})
+                token = jwt.encode({
+                    'user': email,
+                    'exp': datetime.utcnow() + timedelta(minutes=30)
+                }, os.getenv('SECRET_KEY'))
+                return jsonify({'id':  str(user['_id']), 'token': token, 'admin': False})
     return jsonify({'error': 'Invalid username or password'})
 
 
@@ -70,11 +76,11 @@ def sign_up():
         return jsonify({'error': 'User already exists'})
 
     # Check password length
-    if not (len(password) >= 8 
-    and re.search(r'[A-Z]', password)
-    and re.search(r'[a-z]', password)
-    and re.search(r'\d', password)
-    and re.search(r'[!@#$%^&*(),.?":{}|<>]', password)):
+    if not (len(password) >= 8
+            and re.search(r'[A-Z]', password)
+            and re.search(r'[a-z]', password)
+            and re.search(r'\d', password)
+            and re.search(r'[!@#$%^&*(),.?":{}|<>]', password)):
         return jsonify({'error': 'Password must be at least 8 characters and contain at least'
                         'one uppercase letter, one lowercase letter, one digit, and one special'
                         'character'})
@@ -92,22 +98,6 @@ def sign_up():
 
     return jsonify({'success': True})
 
-@app.route('/cars', methods=['GET'])
-def get_cars():
-    #This function gets all the cars from the database and returns them as JSON object.
-    cars = []
-    for car in mongo.db.cars.find():
-        cars.append({
-            'id': str(car['_id']),
-            'make': car['make'],
-            'model': car['model'],
-            'year': car['year'],
-            'price': car['price'],
-            'image': car['image']
-        })
-    if len(cars) == 0:
-        return jsonify({'error': 'No cars found in database'})
-    return jsonify(cars)
 
 ####################################################################
 ###########################  CARS SECTION ##########################
@@ -130,6 +120,20 @@ def get_cars():
     if len(cars) == 0:
         return jsonify({'error': 'No cars found in database'})
     return jsonify(cars)
+
+
+@app.route('/addcars', methods=['POST'])
+def add_car():
+    car_data = {
+        '_id': str(ObjectId()),
+        'make': request.json['make'],
+        'model': request.json['model'],
+        'year': request.json['year'],
+        'price': request.json['price'],
+        'image': request.json['image']
+    }
+    mongo.db.cars.insert_one(car_data)
+    return 'Car added successfully'
 
 
 if __name__ == '__main__':

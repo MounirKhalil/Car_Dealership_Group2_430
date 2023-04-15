@@ -1,30 +1,123 @@
-import "./CarCard.css";
-import arrowImage from '../images/white-arrow.png';
-const CarCard = ({ car }) => {
- return (
-  /*
-    <div className="car-card">
-      <img src={car.image} alt={`${car.make} ${car.model}`} />
-      <h2>{`${car.make} ${car.model}`}</h2>
-      <p>{`Year: ${car.year}`}</p>
-      <p>{`Price: $${car.price}`}</p>
-      <button className="test-drive-btn">Request Test Drive</button>
-    </div>
-    */
-    <div class="box-wrapper">
-    <img src={car.image} alt="rhcp" />
-    <div class="box-content">
-      <a class="buy" href="javascript:void(0)"><span><img class="img-arrow" src={arrowImage}></img></span></a>
-        <div class="title">{`${car.make} ${car.model}`}</div>
-        <div class="desc">{`Year: ${car.year}`}</div>
-        <span class="price">{`Price: $${car.price}`}</span>
-        <div class="footer">
-       </div>
-    </div>
-</div>
-  ); 
-};
+@import url(https://fonts.googleapis.com/css?family=Acme);
 
+.box-wrapper {
+  background-color: #fff;
+  overflow: hidden;
+  box-shadow: 0px 5px 43px rgba(0, 0, 0, 0.48);
+  padding: 10px;
+  margin: 10px;
+  width: 300px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+}
 
+.box-wrapper img {
+  border-radius: 5px;
+  max-width: 100%;
+}
 
-export default CarCard;
+.title {
+  font-size: 2em;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0;
+  font-family: "Acme", sans-serif;
+}
+
+.desc {
+  font-family: "Acme", cursive;
+  font-size: 1.2em;
+}
+
+.box-content {
+  position: relative;
+  z-index: 1;
+}
+
+.box-content:before {
+  content: "";
+  width: 200%;
+  height: 100px;
+  position: absolute;
+  display: block;
+  background-color: #4ba8f4;
+  transform: rotate(-8deg);
+  top: -45px;
+  left: -10%;
+  z-index: -1;
+}
+
+.box-content .buy {
+  display: block;
+  top: -80px;
+  right: 30px;
+  z-index: 2;
+  width: 70px;
+  height: 70px;
+  position: absolute;
+}
+
+.box-content .buy span {
+  width: 70px;
+  height: 70px;
+  background-color: #06d6a0;
+  display: block;
+  border-radius: 50%;
+  position: absolute;
+  font-size: 36px;
+  color: #fff;
+  transition: all 0.3s ease;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 130%;
+}
+
+.box-content .price {
+  font-size: 2em;
+  font-weight: 900;
+  display: block;
+  width: 100px;
+  margin: 20px auto 0;
+  position: relative;
+  font-family: "Acme", cursive;
+}
+
+.box-content .price:after,
+.box-content .price:before {
+  content: "";
+  height: 1px;
+  width: 50px;
+  display: block;
+  position: absolute;
+  background-color: #ddd;
+  top: 18px;
+}
+
+.box-content .price:before {
+  left: -50px;
+}
+
+.box-content .price:after {
+  right: -50px;
+}
+
+.box-content .footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 1em 0;
+}
+
+.box-content .footer ul li {
+  color: #efd829;
+}
+
+.img-arrow {
+  left: 10%;
+  width: 85%;
+  position: relative;
+  top: 15%;
+}

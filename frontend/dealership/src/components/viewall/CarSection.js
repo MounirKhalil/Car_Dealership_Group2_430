@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./CarSection.css";
+import CarCard from "./CarCard";
 
 function CarSection() {
   const cars = [
@@ -176,14 +177,8 @@ function CarSection() {
         </section>
       </section>
       <ul className="grid-container">
-        {filteredCars.map((car) => (
-          <li className="grid-item" key={car.id}>
-            <h2>
-              {car.make} {car.model}
-            </h2>
-            <p>Year: {car.year}</p>
-            <p>Price: {car.price}</p>
-          </li>
+        {filteredCars.map((car, index) => (
+          <CarCard key={index} car={car} />
         ))}
       </ul>
     </>

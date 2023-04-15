@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import UserContext from "../../UserContext";
 import "./SignIn.css";
 
 function SignIn() {
   const [isContainerActive, setIsContainerActive] = useState(false);
+  const [user, setUser] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const rightButton = () => {
     setIsContainerActive(true);
@@ -14,13 +16,18 @@ function SignIn() {
     setIsContainerActive(false);
   };
 
-  const { handleSignIn, user } = useContext(UserContext);
+  const handleSubmit = async (event) => {
+    const response = await fetch("http://127.0.0.1:5000/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await response.json();
+    console.log(data.id, data.token, data.admin);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    handleSignIn(email, password);
+    localStorage.setItem(data.id, data.token, data.admin);
   };
 
   return (
@@ -39,9 +46,37 @@ function SignIn() {
                 <input
                   type="email"
                   placeholder="Email"
+                  id="email1"
+                  name="email"
+                  required
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  id="password1"
+                  name="password"
+                  required
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+                <Link to="/admin">
+                  <button type="submit">Sign in as Admin</button>
+                </Link>
+              </form>
+            </div>
+          </div>
+          <div className="form-container sign-in-container">
+            <div className="form">
+              <form onSubmit={handleSubmit}>
+                <h1>Sign in as user</h1>
+
+                <input
+                  type="email"
+                  placeholder="Email"
                   id="email"
                   name="email"
                   required
+                  onChange={(event) => setEmail(event.target.value)}
                 />
                 <input
                   type="password"
@@ -49,21 +84,11 @@ function SignIn() {
                   id="password"
                   name="password"
                   required
+                  onChange={(event) => setPassword(event.target.value)}
                 />
+
+                <button type="submit">Sign In</button>
               </form>
-              <Link to="/admin">
-                <button>Sign in as Admin</button>
-              </Link>
-            </div>
-          </div>
-          <div className="form-container sign-in-container">
-            <div className="form">
-              <h1>Sign in as user</h1>
-
-              <input type="email" placeholder="Email" />
-              <input type="password" placeholder="Password" />
-
-              <button>Sign In</button>
 
               <br></br>
               <Link to="/signup">
