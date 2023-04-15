@@ -72,7 +72,10 @@ function App() {
             element={<SignUp />}
             render={() => <SignUp handleSignUp={handleSignUp} />}
           />
-          <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/admin" element={<AdminPanel />}>
+            {/* <Route path="/admin/add-car-listing" element={<CarAddingForm />} /> */}
+          </Route>
+
           <Route path="/" element={<Landing />} />
         </Routes>
       </UserContext.Provider>
