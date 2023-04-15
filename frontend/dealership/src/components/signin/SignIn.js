@@ -62,11 +62,13 @@ function SignIn() {
 
               <input type="email" placeholder="Email" />
               <input type="password" placeholder="Password" />
-              <Link to="/user">
-                <button>Sign In</button>
-              </Link>
+
+              <button>Sign In</button>
+
               <br></br>
-              <button>Sign Up</button>
+              <Link to="/signup">
+                <button>Sign Up</button>
+              </Link>
             </div>
           </div>
           <div className="overlay-container">

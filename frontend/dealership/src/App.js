@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignIn from "./components/signin/SignIn";
-import SignUp from "./components/SignUp";
+import SignUp from "./components/signup/SignUp";
 import NavBar from "./components/navbar/NavBar";
 import Landing from "./components/landing/Landing";
 import AdminPanel from "./components/admin/landing/AdminPanel";
@@ -72,10 +72,7 @@ function App() {
             element={<SignUp />}
             render={() => <SignUp handleSignUp={handleSignUp} />}
           />
-          <Route path="/admin" element={<AdminPanel />}>
-            {/* <Route path="/admin/add-car-listing" element={<CarAddingForm />} /> */}
-          </Route>
-
+          <Route path="/admin" element={<AdminPanel />} />
           <Route path="/" element={<Landing />} />
         </Routes>
       </UserContext.Provider>
