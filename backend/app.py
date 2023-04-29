@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 import os
 import re
 from flask_cors import CORS, cross_origin
+from bson import ObjectId, json_util
+import json
 
 load_dotenv()
 
@@ -222,6 +224,15 @@ def delete_timeslot(timeslot_id):
         return {'message': 'Timeslot deleted successfully'}
     except:
         return {'error': 'Invalid timeslot ID'}
+
+
+@app.route('/user/<user_id>', methods=['GET'])
+def get_user_info(user_id):
+    user = mongo.db.users.find_one({'_id': ObjectId(user_id)})
+    user['_id'] = str(user['_id'])
+    if not user:
+        return jsonify({'error': 'user not found'})
+    return json.loads(json_util.dumps(user))
 
 
 if __name__ == '__main__':
