@@ -1,0 +1,96 @@
+.test-drive-booking {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    width: 80%;
+    margin: 0 auto;
+    }
+    
+    .test-drive-header {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 32px;
+    text-align: center;
+    }
+    
+    .date-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+    }
+    
+    .date-picker-section,
+    .time-picker-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+    width: 100%;
+    }
+    
+    .date-picker-label,
+    .time-picker-label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-align: center;
+    text-transform: uppercase;
+    }
+    
+    .date-picker,
+    .time-picker-dropdown {
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    height: 48px;
+    padding: 12px;
+    width: 100%;
+    margin-top: 8px;
+    }
+    
+    .date-picker:hover,
+    .time-picker-dropdown:hover {
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+    }
+    
+    .date-picker:focus,
+    .time-picker-dropdown:focus {
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2);
+    outline: none;
+    }
+    
+    .date-picker::placeholder,
+    .time-picker-dropdown option:first-child {
+    color: #a9a9a9;
+    }
+    
+    .timeslot-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+    }
+    
+    .timeslot-button {
+    background-color: #0077ff;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    height: 48px;
+    padding: 12px 24px;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+    transition: background-color 0.2s ease-in-out;
+    }
+    
+    .timeslot-button:hover {
+    background-color: #005fec;
+    cursor: pointer;
+    }

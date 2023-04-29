@@ -41,7 +41,7 @@ const CarCard = ({ car, onClick }) => {
         </a>
         <div class="title">{`${car.make} ${car.model}`}</div>
         <div class="desc">{`Year: ${car.year}`}</div>
-        <span class="price">{`Price: $${car.price}`}</span>
+        <span class="price">{`Price: ${car.price}`}</span>
         <div class="footer"></div>
       </div>
     </div>

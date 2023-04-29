@@ -2,32 +2,27 @@ import React, { useState, useEffect } from "react";
 import "./CarRequests.css";
 
 function CarRequests() {
-  const [carRequests, setCarRequests] = useState([
-    {
-      id: 1,
-      car_id: "ABC123",
-      user: "John Doe",
-      date: "2022-01-01",
-    },
-    {
-      id: 2,
-      car_id: "XYZ456",
-      user: "Jane Doe",
-      date: "2022-02-01",
-    },
-    {
-      id: 3,
-      car_id: "DEF789",
-      user: "Bob Smith",
-      date: "2022-03-01",
-    },
-    {
-      id: 4,
-      car_id: "GHI101",
-      user: "Alice Johnson",
-      date: "2022-04-01",
-    },
-  ]);
+  const [carRequests, setCarRequests] = useState([]);
+  const fetchSlots = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/get_reserved_slots", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+
+      setCarRequests(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchSlots();
+  }, []);
+
   const [colorIndex, setColorIndex] = useState(0);
 
   useEffect(() => {
@@ -50,10 +45,19 @@ function CarRequests() {
   };
 
   const handleDelete = (id) => {
-    const updatedCarRequests = carRequests.filter(
-      (carRequest) => carRequest.id !== id
-    );
-    setCarRequests(updatedCarRequests);
+    (async () => {
+      // DELETE request using fetch with async/await
+      await fetch(`http://127.0.0.1:5000/delete_timeslot/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setCarRequests(
+        carRequests.filter((carRequest) => carRequest.userid !== id)
+      );
+      alert("Delete successful");
+    })();
   };
 
   const rows = carRequests.map((carRequest, index) => (
@@ -61,9 +65,9 @@ function CarRequests() {
       className={index % 2 === colorIndex ? "odd" : "even"}
       key={carRequest.id}
     >
-      <td>{carRequest.car_id}</td>
-      <td>{carRequest.user}</td>
-      <td>{carRequest.date}</td>
+      <td>{carRequest._id}</td>
+      <td>{carRequest.time}</td>
+      <td>{carRequest.userid}</td>
       <td>
         {!carRequest.accepted && (
           <button
@@ -75,7 +79,7 @@ function CarRequests() {
         )}
         <button
           className="delete-btn"
-          onClick={() => handleDelete(carRequest.id)}
+          onClick={() => handleDelete(carRequest.userid)}
         >
           Delete
         </button>
@@ -87,9 +91,9 @@ function CarRequests() {
     <table className="car-requests-table">
       <thead>
         <tr>
-          <th>Car ID</th>
-          <th>User</th>
-          <th>Date</th>
+          <th>TimeSlot ID</th>
+          <th>Time</th>
+          <th>User ID</th>
           <th>Action</th>
         </tr>
       </thead>

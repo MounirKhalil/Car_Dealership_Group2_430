@@ -132,6 +132,7 @@ def get_cars():
             'model': car['model'],
             'year': car['year'],
             'price': car['price'],
+            'color': car['color'],
             'image': car['image']
         })
     if len(cars) == 0:
@@ -142,11 +143,11 @@ def get_cars():
 @app.route('/addcars', methods=['POST'])
 def add_car():
     car_data = {
-        '_id': str(ObjectId()),
         'make': request.json['make'],
         'model': request.json['model'],
         'year': request.json['year'],
         'price': request.json['price'],
+        'color': request.json['color'],
         'image': request.json['image']
     }
     mongo.db.cars.insert_one(car_data)

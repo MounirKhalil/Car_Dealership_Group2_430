@@ -4,10 +4,11 @@ function CarAddingForm(props) {
   // A state variable to store the car object
   const [car, setCar] = useState({
     model: "",
-    brand: "",
+    make: "",
     color: "",
     year: "",
     price: "",
+    image: "",
   });
 
   // A function to handle the input change events
@@ -20,23 +21,23 @@ function CarAddingForm(props) {
   };
 
   // A function to handle the form submit event
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    props.addCar(car); // A function passed as a prop to add the car to the list
-    setCar({
-      model: "",
-      brand: "",
-      color: "",
-      year: "",
-      price: "",
-    }); // Reset the car state
+  const handleSubmit = () => {
+    fetch("http://127.0.0.1:5000/addcars", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(car),
+    });
+
+    alert("car added!");
   };
 
   return (
-    <div className="form-container">
+    <div style={{ margin_top: "200px" }}>
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="model">Model</label>
+          <label htmlFor="model">Model:</label>
           <input
             type="text"
             id="model"
@@ -47,18 +48,18 @@ function CarAddingForm(props) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="brand">Brand</label>
+          <label htmlFor="make">Make:</label>
           <input
             type="text"
-            id="brand"
-            name="brand"
-            value={car.brand}
+            id="make"
+            name="make"
+            value={car.make}
             onChange={handleChange}
             required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="color">Color</label>
+          <label htmlFor="color">Color:</label>
           <input
             type="text"
             id="color"
@@ -69,7 +70,7 @@ function CarAddingForm(props) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="year">Year</label>
+          <label htmlFor="year">Year:</label>
           <input
             type="number"
             id="year"
@@ -80,12 +81,23 @@ function CarAddingForm(props) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="price">Price</label>
+          <label htmlFor="price">Price:</label>
           <input
             type="number"
             id="price"
             name="price"
             value={car.price}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="image">Image URL:</label>
+          <input
+            type="text"
+            id="image"
+            name="image"
+            value={car.image}
             onChange={handleChange}
             required
           />

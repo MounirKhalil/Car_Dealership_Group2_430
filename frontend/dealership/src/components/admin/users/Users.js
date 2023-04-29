@@ -2,52 +2,29 @@ import React, { useState, useEffect } from "react";
 import "./Users.css";
 
 function Users() {
-  const [users, setUsers] = useState([
-    {
-      id: 1,
-      first_name: "John",
-      last_name: "Doe",
-      email: "john.doe@example.com",
-      mobile: "555-1234",
-      admin: true,
-    },
-    {
-      id: 2,
-      first_name: "Jane",
-      last_name: "Doe",
-      email: "jane.doe@example.com",
-      mobile: "555-5678",
-      admin: false,
-    },
-    {
-      id: 3,
-      first_name: "Bob",
-      last_name: "Smith",
-      email: "bob.smith@example.com",
-      mobile: "555-9876",
-      admin: true,
-    },
-    {
-      id: 4,
-      first_name: "Alice",
-      last_name: "Johnson",
-      email: "alice.johnson@example.com",
-      mobile: "555-4321",
-      admin: false,
-    },
-  ]);
-  const [colorIndex, setColorIndex] = useState(0);
+  const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    async function fetchUsers() {
-      const response = await fetch("/link", {
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/users", {
         method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       const data = await response.json();
+
       setUsers(data);
+    } catch (error) {
+      console.error(error);
     }
+  };
+
+  useEffect(() => {
     fetchUsers();
   }, []);
+
+  const [colorIndex, setColorIndex] = useState(0);
 
   const rows = users.map((user, index) => (
     <tr className={index % 2 === colorIndex ? "odd" : "even"} key={user.id}>

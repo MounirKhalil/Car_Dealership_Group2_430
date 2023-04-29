@@ -7,100 +7,9 @@ import CarDetails from "./cardetails/CarDetails";
 import Modal from "react-modal";
 
 function CarSection() {
-  const cars = [
-    {
-      id: "0",
-      year: "2002",
-      make: "Honda",
-      model: "model1",
-      image:
-        "https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=1200",
-      price: 6000,
-    },
-    {
-      id: "1",
-      year: "2005",
-      make: "Toyota",
-      model: "model2",
-      image:
-        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2022-bmw-x5-xdrive45e-101-1643896618.jpg",
-      price: 9000,
-    },
-    {
-      id: "2",
-      year: "2010",
-      make: "Nissan",
-      model: "model3",
-      image:
-        "https://hips.hearstapps.com/hmg-prod/images/2022-porsche-911-gt3-rs-101-1663960213.jpg",
-      price: 15000,
-    },
-    {
-      id: "3",
-      year: "2012",
-      make: "Ford",
-      model: "model4",
-      image:
-        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2023-audi-a3-sportback-101-1655233835.jpg",
-      price: 12000,
-    },
-    {
-      id: "4",
-      year: "2015",
-      make: "Chevrolet",
-      model: "model5",
-      image:
-        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2023-ferrari-purosangue-101-1654904968.jpg",
-      price: 18000,
-    },
-    {
-      id: "5",
-      year: "2018",
-      make: "BMW",
-      model: "model6",
-      image:
-        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2022-audi-q4-e-tron-101-1650238704.jpg",
-      price: 25000,
-    },
-    {
-      id: "6",
-      year: "2019",
-      make: "Lamborghini",
-      model: "model7",
-      image:
-        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2023-lexus-lx600-101-1654960671.jpg",
-      price: 35000,
-    },
-    {
-      id: "7",
-      year: "2020",
-      make: "Mercedes-Benz",
-      model: "model8",
-      image:
-        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2022-audi-s3-sportback-101-1654910427.jpg",
-      price: 28000,
-    },
-    {
-      id: "8",
-      year: "2021",
-      make: "Acura",
-      model: "model9",
-      image:
-        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2023-mclaren-artura-101-1655218102.jpg",
-      price: 45000,
-    },
-    {
-      id: "9",
-      year: "2022",
-      make: "Tesla",
-      model: "model10",
-      image:
-        "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2023-mclaren-artura-101-1655218102.jpg",
-      price: 55000,
-    },
-  ];
+  const [cars, setCars] = useState([]);
 
-  const [filteredCars, setFilteredCars] = useState(cars);
+  const [filteredCars, setFilteredCars] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [makeFilter, setMakeFilter] = useState("");
   const [minPriceFilter, setMinPriceFilter] = useState(0);
@@ -113,16 +22,40 @@ function CarSection() {
   const [CarId, setCarId] = useState("");
   const [selectedCarDetails, setSelectedCarDetails] = useState(null);
 
+  const fetchCars = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/cars", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+
+      setCars(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    const filtered = cars.filter((car) => {
-      return (
-        car.make.includes(makeFilter) &&
-        car.price >= minPriceFilter &&
-        car.price <= maxPriceFilter &&
-        car.model.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    });
-    setFilteredCars(filtered);
+    fetchCars();
+  }, []);
+
+  useEffect(() => {
+    async function filterCars() {
+      const filtered = await cars.filter(async (car) => {
+        console.log(car);
+        return (
+          car.make.includes(makeFilter) &&
+          car.price >= minPriceFilter &&
+          car.price <= maxPriceFilter &&
+          car.model.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      });
+      setFilteredCars(filtered);
+    }
+    filterCars();
   }, [cars, makeFilter, minPriceFilter, maxPriceFilter, searchTerm]);
 
   const handleSearch = (event) => {
@@ -153,8 +86,8 @@ function CarSection() {
     if (comparisonMode && selectedCars.length < 2) {
       setSelectedCars([...selectedCars, car]);
     } else if (!comparisonMode) {
-      setShowCarDetails(true);
       setCarId(car.id);
+      setShowCarDetails(true);
       setSelectedCarDetails(car);
     }
 
@@ -192,6 +125,28 @@ function CarSection() {
       setShowResults(true);
     }
   }, [showCarDetails]);
+
+  const [my_car, setMyCar] = useState({});
+  useEffect(() => {
+    const fetchCar = async (CarId) => {
+      try {
+        const response = await fetch(`http://127.0.0.1:5000/car/${CarId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+
+        setMyCar(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    if (CarId != "") {
+      fetchCar(CarId);
+    }
+  }, [CarId]);
 
   return (
     <>
@@ -251,7 +206,7 @@ function CarSection() {
         </button>
       </section>
 
-      {showCarDetails && <CarDetails CarId />}
+      {showCarDetails && <CarDetails my_car={my_car} />}
 
       {selectedCars.length === 2 && (
         <Modal

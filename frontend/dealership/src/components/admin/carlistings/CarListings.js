@@ -2,50 +2,36 @@ import React, { useState, useEffect } from "react";
 import "./CarListings.css";
 
 function CarListing() {
-  const [cars, setCars] = useState([
-    {
-      id: 1,
-      make: "Toyota",
-      model: "Corolla",
-      year: 2021,
-      price: "$20,000",
-      image: "https://example.com/toyota-corolla.jpg",
-    },
-    {
-      id: 2,
-      make: "Honda",
-      model: "Civic",
-      year: 2022,
-      price: "$22,000",
-      image: "https://example.com/honda-civic.jpg",
-    },
-    {
-      id: 3,
-      make: "Ford",
-      model: "Mustang",
-      year: 2021,
-      price: "$35,000",
-      image: "https://example.com/ford-mustang.jpg",
-    },
-  ]);
-  const [colorIndex, setColorIndex] = useState(0);
-
-  useEffect(() => {
-    async function fetchCars() {
-      const response = await fetch("/link", {
+  const [cars, setCars] = useState([]);
+  const fetchCars = async () => {
+    try {
+      const response = await fetch("http://127.0.0.1:5000/cars", {
         method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       const data = await response.json();
+
       setCars(data);
+    } catch (error) {
+      console.error(error);
     }
+  };
+
+  useEffect(() => {
     fetchCars();
   }, []);
+  const [colorIndex, setColorIndex] = useState(0);
 
   const handleDelete = (id) => {
     (async () => {
       // DELETE request using fetch with async/await
-      await fetch("/link" + id, {
+      await fetch(`http://127.0.0.1:5000/delete_car/${id}`, {
         method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
       const updatedCars = cars.filter((car) => car.id !== id);
       setCars(updatedCars);
@@ -59,6 +45,7 @@ function CarListing() {
       <td>{car.model}</td>
       <td>{car.year}</td>
       <td>{car.price}</td>
+      <td>{car.color}</td>
       <td>
         <img src={car.image} alt={`${car.make} ${car.model}`} />
       </td>
@@ -76,7 +63,9 @@ function CarListing() {
           <th>Model</th>
           <th>Year</th>
           <th>Price</th>
+          <th>Color</th>
           <th>Image</th>
+
           <th>Action</th>
         </tr>
       </thead>

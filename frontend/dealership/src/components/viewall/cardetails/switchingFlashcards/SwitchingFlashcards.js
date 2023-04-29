@@ -178,7 +178,7 @@ const SwitchingFlashcards = ({ car }) => {
             <p>DESCRIPTION</p>
           </div>
           <div className={"card-text-2-b description"}>
-            <p>{car.description}</p>
+            <p>fun ,reliable and efficient. </p>
           </div>
         </div>
       </div>
