@@ -10,6 +10,30 @@ from flask_cors import CORS, cross_origin
 from bson import ObjectId, json_util
 import json
 
+import smtplib
+from email.message import EmailMessage
+
+
+def send_email(user_email, subject, message):
+    try:
+        email = EmailMessage()
+        email.set_content(message)
+        email["Subject"] = subject
+        email["From"] = os.getenv("EMAIL_USERNAME")
+        email["To"] = user_email
+
+        with smtplib.SMTP_SSL(os.getenv("EMAIL_SERVER"), os.getenv("EMAIL_PORT")) as server:
+            server.login(os.getenv("EMAIL_USERNAME"),
+                         os.getenv("EMAIL_PASSWORD"))
+            server.send_message(email)
+
+        return True
+    except Exception as e:
+        print(f"Error sending email: {e}")
+
+        return False
+
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -113,6 +137,11 @@ def sign_up():
         'admin': admin
     })
 
+    user_email = email
+    subject = "Welcome to Our Website"
+    message = f"Dear {first_name} {last_name},\n\nThank you for signing up on our website. We are glad to have you on board!\n\nBest regards,\nThe Website Team"
+    send_email(user_email, subject, message)
+
     return jsonify({'success': True})
 
 
@@ -214,6 +243,11 @@ def reserve_slot():
         'userid': request.json['userid']
     }
     mongo.db.timeslots.insert_one(timeslot)
+    user = mongo.db.users.find_one({'_id': ObjectId(request.json['userid'])})
+    user_email = user['email']
+    subject = "Test Drive Slot Reserved"
+    message = f"Dear {user['first_name']} {user['last_name']},\n\nYour test drive slot has been successfully reserved for {request.json['time']}.\n\nLooking forward to seeing you!\n\nBest regards,\nThe Website Team"
+    send_email(user_email, subject, message)
     return 'Timeslot reserved successfully!'
 
 
@@ -222,6 +256,11 @@ def delete_timeslot(user_id):
     # function that deletes timeslot from database using id
     try:
         mongo.db.timeslots.delete_one({'userid': user_id})
+        user = mongo.db.users.find_one({'_id': ObjectId(user_id)})
+        user_email = user['email']
+        subject = "Test Drive Slot Canceled"
+        message = f"Dear {user['first_name']} {user['last_name']},\n\nYour test drive slot has been successfully canceled.\n\nWe hope to see you again soon!\n\nBest regards,\nThe Website Team"
+        send_email(user_email, subject, message)
         return {'message': 'Timeslot deleted successfully'}
     except:
         return {'error': 'Invalid timeslot ID'}

@@ -43,8 +43,8 @@ function CarSection() {
   }, []);
 
   useEffect(() => {
-    async function filterCars() {
-      const filtered = await cars.filter(async (car) => {
+    function filterCars() {
+      const filtered = cars.filter(async (car) => {
         console.log(car);
         return (
           car.make.includes(makeFilter) &&
