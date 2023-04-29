@@ -216,11 +216,11 @@ def reserve_slot():
     return 'Timeslot reserved successfully!'
 
 
-@app.route('/delete_timeslot/<timeslot_id>', methods=['DELETE'])
-def delete_timeslot(timeslot_id):
+@app.route('/delete_timeslot/<user_id>', methods=['DELETE'])
+def delete_timeslot(user_id):
     # function that deletes timeslot from database using id
     try:
-        mongo.db.timeslots.delete_one({'_id': ObjectId(timeslot_id)})
+        mongo.db.timeslots.delete_one({'userid': user_id})
         return {'message': 'Timeslot deleted successfully'}
     except:
         return {'error': 'Invalid timeslot ID'}
@@ -233,6 +233,14 @@ def get_user_info(user_id):
     if not user:
         return jsonify({'error': 'user not found'})
     return json.loads(json_util.dumps(user))
+
+
+@app.route('/slot_by_id/<user_id>', methods=['GET'])
+def slot_by_id(user_id):
+    timeslot = mongo.db.timeslots.find_one({'userid': user_id})
+    if not timeslot:
+        return "no test drive"
+    return json.loads(json_util.dumps(timeslot))
 
 
 if __name__ == '__main__':

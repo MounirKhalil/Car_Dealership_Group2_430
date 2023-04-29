@@ -6,9 +6,8 @@ function Profile() {
     name: "Name",
     email: "Email",
     Mobile: "Mobile",
-    reservedTimeSlot: "",
   });
-  const [reservedTimeSlot, setReservedTimeSlot] = useState("");
+  const [reservedTimeSlot, setReservedTimeSlot] = useState("no test drive");
   const [tokenData, setTokenData] = useState(null);
 
   useEffect(() => {
@@ -42,10 +41,46 @@ function Profile() {
         //   setReservedTimeSlot(userdata.reservedTimeSlot || "");
       };
 
+      const getTimeSlot = async () => {
+        const response = await fetch(
+          `http://127.0.0.1:5000/slot_by_id/${userId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const timeslotData = await response.json();
+
+        setReservedTimeSlot(timeslotData.time);
+      };
+
       getUserData();
+      getTimeSlot();
     }
   }, [tokenData]);
-  console.log(userInfo);
+
+  const deleteTimeSlot = async () => {
+    const userId = tokenData.id;
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:5000/delete_timeslot/${userId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data.message);
+    } catch (error) {
+      console.error(error);
+    }
+    window.location.reload();
+  };
+
   return (
     <div>
       <h1 className="profile-page-name">Welcome, {userInfo.name}!</h1>
@@ -57,18 +92,19 @@ function Profile() {
         <div className="profile-page-otherinfo">
           <h2 className="profile-page-email">Your email: {userInfo.email}</h2>
           <h3>Mobile: {userInfo.Mobile}</h3>
-          {userInfo.reservedTimeSlot !== "" && (
+          {reservedTimeSlot !== "no test drive" && (
             <div className="profile-page-reserved-timeslot">
-              <h3>Your reserved time slot: {userInfo.reservedTimeSlot}</h3>
-              <button className="profile-page-button" type="button">
+              <h3>Your reserved time slot: {reservedTimeSlot}</h3>
+              <button
+                className="profile-page-button"
+                type="button"
+                onClick={() => deleteTimeSlot()}
+              >
                 Unbook test drive
-              </button>
-              <button className="profile-page-button" type="button">
-                Edit booking
               </button>
             </div>
           )}
-          {userInfo.reservedTimeSlot == "" && (
+          {reservedTimeSlot == "no test drive" && (
             <h3>You don't have a test drive booked.</h3>
           )}
         </div>

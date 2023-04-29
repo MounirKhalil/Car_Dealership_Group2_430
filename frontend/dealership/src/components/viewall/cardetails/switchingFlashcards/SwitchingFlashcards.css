@@ -1,0 +1,173 @@
+:root {
+  /* --background-color: #21252e; */
+  --first-card: #2196f5;
+  --second-card: whitesmoke;
+}
+
+.card-container {
+  position: relative;
+  height: 70vh; /* Set a fixed height for the container */
+  overflow-y: auto; /* Add scrollbars to the container if it overflows */
+  padding-left: 2vw;
+  padding-top: 12vh; /* 12vh + (height of a card)vh */
+  bottom: 8vh;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  width: 400px;
+  height: 300px;
+  transition: transform 0.3s ease-out;
+  /* box-shadow: 0 0 2px 0 #000; */
+  border-radius: 1% / 20%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  /* You may need to adjust the margins to position the cards correctly inside the container */
+  margin: 20px auto;
+}
+
+.card-text-1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-text-1-a {
+  flex: 0.3;
+  justify-content: center;
+}
+
+.card-text-1-a p {
+  font-size: 50px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: #2196f5;
+}
+
+.card-text-1-b {
+  flex: 0.7;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.card-text-1-b p {
+  font-size: min(10vw, max(16px, 100vw / 20));
+  line-height: 3vh;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: #2196f5;
+}
+
+.card-text-2 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-text-2-a {
+  flex: 0.3;
+  justify-content: center;
+}
+
+.card-text-2-a p {
+  font-size: 50px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+}
+
+.card-text-2-b {
+  flex: 0.7;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.card-text-2-b p {
+  font-size: min(10vw, max(16px, 100vw / 20));
+  line-height: 10vh;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+}
+
+.press-d {
+  display: flex;
+  flex-direction: row;
+}
+
+.press-d-text {
+  flex: 0.5;
+  justify-content: center;
+  align-items: center;
+}
+
+.press-d-text p {
+  font-size: 50px;
+  color: whitesmoke;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1vw;
+}
+
+.press-d-image {
+  justify-content: center;
+  align-items: center;
+  flex: 0.5;
+  height: 10vh;
+}
+
+.card:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-family: sans-serif;
+  color: var(--background-color);
+  background-color: var(--first-card);
+}
+
+.description p{
+    font-size: large;
+}
+
+.card:nth-child(2),
+.card:nth-child(4),
+.card:nth-child(6),
+.card:nth-child(8) {
+  background-color: var(--second-card);
+}
+
+.card:nth-child(3),
+.card:nth-child(5),
+.card:nth-child(7) {
+  background-color: var(--first-card);
+}
+
+@media (max-width: 700px) {
+  .card {
+    width: 80%;
+  }
+
+  .card:first-child {
+    font-size: 1rem;
+  }
+}
+
+@media (max-height: 400px) {
+  .card {
+    height: 40%;
+  }
+}

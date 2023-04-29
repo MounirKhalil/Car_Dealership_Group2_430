@@ -110,6 +110,7 @@ function CarSection() {
   const [comparisonMode, setComparisonMode] = useState(false);
 
   const [showCarDetails, setShowCarDetails] = useState(false);
+  const [CarId, setCarId] = useState("");
   const [selectedCarDetails, setSelectedCarDetails] = useState(null);
 
   useEffect(() => {
@@ -153,6 +154,7 @@ function CarSection() {
       setSelectedCars([...selectedCars, car]);
     } else if (!comparisonMode) {
       setShowCarDetails(true);
+      setCarId(car.id);
       setSelectedCarDetails(car);
     }
 
@@ -183,9 +185,20 @@ function CarSection() {
     }
   }, [selectedCars.length]);
 
+  const [showResults, setShowResults] = useState(false);
+
+  useEffect(() => {
+    if (showCarDetails) {
+      setShowResults(true);
+    }
+  }, [showCarDetails]);
+
   return (
     <>
-      <section className="SearchBar">
+      <section
+        className="SearchBar"
+        style={{ display: showResults ? "none" : "flex" }}
+      >
         <input
           className="SearchInput"
           type="text"
@@ -238,7 +251,7 @@ function CarSection() {
         </button>
       </section>
 
-      {showCarDetails && <CarDetails />}
+      {showCarDetails && <CarDetails CarId />}
 
       {selectedCars.length === 2 && (
         <Modal
@@ -272,7 +285,10 @@ function CarSection() {
         </Modal>
       )}
 
-      <ul className="grid-container">
+      <ul
+        className="grid-container"
+        style={{ display: showResults ? "none" : "grid" }}
+      >
         {filteredCars.map((car, index) => (
           <CarCard
             key={index}
