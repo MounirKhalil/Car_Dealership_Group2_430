@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 
 function NavBar() {
   const [click, setClick] = useState(false);
+
+  const [tokenData, setTokenData] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const tokenDataString = localStorage.getItem("tokenData");
+    if (tokenDataString) {
+      const parsedTokenData = JSON.parse(tokenDataString);
+      setTokenData(parsedTokenData);
+      setLoggedIn(true);
+    }
+  }, []);
 
   const handleClick = () => setClick(!click);
   return (
@@ -37,28 +49,61 @@ function NavBar() {
                 View Cars
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink
-                exact
-                to="/signup"
-                activeClassName="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Sign up
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink
-                exact
-                to="/signin"
-                activeClassName="active"
-                className="nav-links"
-                onClick={handleClick}
-              >
-                Sign in
-              </NavLink>
-            </li>
+            {loggedIn ? (
+              <>
+                <li className="nav-item">
+                  <NavLink
+                    exact
+                    to="/profile"
+                    activeClassName="active"
+                    className="nav-links"
+                    onClick={handleClick}
+                  >
+                    Profile
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    exact
+                    to="/"
+                    activeClassName="active"
+                    className="nav-links"
+                    onClick={() => {
+                      setTokenData(null);
+                      setLoggedIn(false);
+                      localStorage.removeItem("tokenData");
+                    }}
+                  >
+                    Sign out
+                  </NavLink>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <NavLink
+                    exact
+                    to="/signup"
+                    activeClassName="active"
+                    className="nav-links"
+                    onClick={handleClick}
+                  >
+                    Sign up
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    exact
+                    to="/signin"
+                    activeClassName="active"
+                    className="nav-links"
+                    onClick={handleClick}
+                  >
+                    Sign in
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
           <div className="nav-icon" onClick={handleClick}>
             <div

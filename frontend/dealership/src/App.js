@@ -7,6 +7,7 @@ import Footer from "./components/footer/Footer";
 import CarSection from "./components/viewall/CarSection";
 import Landing from "./components/landing/Landing";
 import AdminPanel from "./components/admin/landing/AdminPanel";
+import Profile from "./components/profile/Profile";
 
 function App() {
   // const handleSignIn = async (email, password) => {
@@ -44,6 +45,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/admin" element={<AdminPanel />} />
         <Route path="/ViewCars" element={<CarSection />} />
+        <Route path="/Profile" element={<Profile />} />
         <Route path="/" element={<Landing />} />
       </Routes>
       <Footer />
