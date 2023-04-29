@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./CarSection.css";
 import CarCard from "./CarCard";
+import CompareTwoCars from "./comparetwocars/CompareTwoCars";
+import CarDetails from "./cardetails/CarDetails";
+
+import Modal from "react-modal";
 
 function CarSection() {
   const cars = [
@@ -102,6 +106,12 @@ function CarSection() {
   const [minPriceFilter, setMinPriceFilter] = useState(0);
   const [maxPriceFilter, setMaxPriceFilter] = useState(999999);
 
+  const [selectedCars, setSelectedCars] = useState([]);
+  const [comparisonMode, setComparisonMode] = useState(false);
+
+  const [showCarDetails, setShowCarDetails] = useState(false);
+  const [selectedCarDetails, setSelectedCarDetails] = useState(null);
+
   useEffect(() => {
     const filtered = cars.filter((car) => {
       return (
@@ -130,6 +140,49 @@ function CarSection() {
     setMaxPriceFilter(event.target.value);
   };
 
+  const [buttonPressed, setButtonPressed] = useState(false);
+  const handleCompareButtonClick = () => {
+    setSelectedCars([]);
+    setComparisonMode(true);
+
+    setButtonPressed(true);
+  };
+
+  const handleCarCardClick = (car) => {
+    if (comparisonMode && selectedCars.length < 2) {
+      setSelectedCars([...selectedCars, car]);
+    } else if (!comparisonMode) {
+      setShowCarDetails(true);
+      setSelectedCarDetails(car);
+    }
+
+    if (selectedCars.length === 1) {
+      setComparisonMode(false);
+    }
+  };
+
+  const handleCloseCarDetails = () => {
+    setShowCarDetails(false);
+    setSelectedCarDetails(null);
+  };
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    if (selectedCars.length === 2) {
+      handleShowModal();
+    }
+  }, [selectedCars.length]);
+
   return (
     <>
       <section className="SearchBar">
@@ -140,6 +193,7 @@ function CarSection() {
           value={searchTerm}
           onChange={handleSearch}
         />
+
         <section className="Filters">
           <select
             className="Filter"
@@ -175,10 +229,56 @@ function CarSection() {
             <option value="50000">50000</option>
           </select>
         </section>
+        <button
+          className="CompareButton"
+          onClick={handleCompareButtonClick}
+          style={{ backgroundColor: buttonPressed ? "green" : "blue" }}
+        >
+          Compare two cars
+        </button>
       </section>
+
+      {showCarDetails && <CarDetails />}
+
+      {selectedCars.length === 2 && (
+        <Modal
+          isOpen={showModal}
+          onRequestClose={handleCloseModal}
+          style={{
+            overlay: {
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
+              zIndex: 999,
+            },
+            content: {
+              top: "50%",
+              left: "50%",
+              right: "auto",
+              bottom: "auto",
+              marginRight: "-50%",
+              transform: "translate(-50%, -50%)",
+              maxWidth: "80%",
+              maxHeight: "80%",
+              overflow: "auto",
+              backgroundColor: "#fff",
+              borderRadius: "5px",
+              outline: "none",
+              padding: "20px",
+            },
+          }}
+        >
+          <CompareTwoCars car1={selectedCars[0]} car2={selectedCars[1]} />
+          <br></br>
+          <button onClick={handleCloseModal}>Close</button>
+        </Modal>
+      )}
+
       <ul className="grid-container">
         {filteredCars.map((car, index) => (
-          <CarCard key={index} car={car} />
+          <CarCard
+            key={index}
+            car={car}
+            onClick={() => handleCarCardClick(car)}
+          />
         ))}
       </ul>
     </>

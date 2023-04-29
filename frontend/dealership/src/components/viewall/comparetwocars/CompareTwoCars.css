@@ -1,0 +1,58 @@
+.compare-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.compare-table {
+  width: 100%;
+  max-width: 800px;
+  border-collapse: collapse;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.compare-table thead {
+  background-color: #f7f7f7;
+}
+
+.compare-table thead th {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.75rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.compare-table tbody tr:nth-child(odd) {
+  background-color: #f7f7f7;
+}
+
+.compare-table .image-cell {
+  padding: 0.5rem;
+}
+
+.compare-table .image-cell img {
+  max-width: 100%;
+  height: auto;
+}
+
+.compare-table .data-cell {
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+
+.compare-table .higher {
+  background-color: #d4edda;
+}
+
+.compare-table .lower,
+.compare-table .equal {
+  background-color: transparent;
+}
+
+.image-cell > img {
+  width: 20vw;
+  height: 30vh;
+}

@@ -2,7 +2,13 @@ import "./CarCard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-const CarCard = ({ car }) => {
+import React, { useState } from "react";
+
+const CarCard = ({ car, onClick }) => {
+  const [isClicked, setIsClicked] = useState(false);
+  const boxWrapperStyle = {
+    backgroundColor: isClicked ? "lightgrey" : "white",
+  };
   return (
     /*
     <div className="car-card">
@@ -13,7 +19,15 @@ const CarCard = ({ car }) => {
       <button className="test-drive-btn">Request Test Drive</button>
     </div>
     */
-    <div class="box-wrapper">
+
+    <div
+      class="box-wrapper"
+      onClick={() => {
+        setIsClicked(true);
+        onClick();
+      }}
+      style={boxWrapperStyle}
+    >
       <img src={car.image} alt="rhcp" />
       <div class="box-content">
         <a class="buy" href="javascript:void(0)">
