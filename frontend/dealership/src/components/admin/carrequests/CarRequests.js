@@ -5,12 +5,15 @@ function CarRequests() {
   const [carRequests, setCarRequests] = useState([]);
   const fetchSlots = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/get_reserved_slots", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "http://www.epharmac.store:8081/get_reserved_slots",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
 
       setCarRequests(data);
@@ -47,7 +50,7 @@ function CarRequests() {
   const handleDelete = (id) => {
     (async () => {
       // DELETE request using fetch with async/await
-      await fetch(`http://127.0.0.1:5000/delete_timeslot/${id}`, {
+      await fetch(`http://www.epharmac.store:8081/delete_timeslot/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

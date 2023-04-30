@@ -24,12 +24,15 @@ function Profile() {
       console.log(userId);
 
       const getUserData = async () => {
-        const response = await fetch(`http://127.0.0.1:5000/user/${userId}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          `http://www.epharmac.store:8081/user/${userId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
         const userdata = await response.json();
 
         setUserInfo({
@@ -43,7 +46,7 @@ function Profile() {
 
       const getTimeSlot = async () => {
         const response = await fetch(
-          `http://127.0.0.1:5000/slot_by_id/${userId}`,
+          `http://www.epharmac.store:8081/slot_by_id/${userId}`,
           {
             method: "GET",
             headers: {
@@ -65,7 +68,7 @@ function Profile() {
     const userId = tokenData.id;
     try {
       const response = await fetch(
-        `http://127.0.0.1:5000/delete_timeslot/${userId}`,
+        `http://www.epharmac.store:8081/delete_timeslot/${userId}`,
         {
           method: "DELETE",
           headers: {

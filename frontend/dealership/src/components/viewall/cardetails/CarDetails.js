@@ -22,7 +22,7 @@ const CarDetails = ({ my_car }) => {
       const userId = tokenData.id;
       const getTimeSlot = async () => {
         const response = await fetch(
-          `http://127.0.0.1:5000/slot_by_id/${userId}`,
+          `http://www.epharmac.store:8081/slot_by_id/${userId}`,
           {
             method: "GET",
             headers: {

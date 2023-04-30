@@ -20,12 +20,15 @@ const TestDriveBooking = () => {
 
   useEffect(() => {
     const getTimeSlot = async () => {
-      const response = await fetch("http://127.0.0.1:5000/get_reserved_slots", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "http://www.epharmac.store:8081/get_reserved_slots",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const timeslotData = await response.json();
       setReservedSlots(timeslotData.map((slot) => slot.time));
     };
@@ -68,22 +71,25 @@ const TestDriveBooking = () => {
   };
 
   const handleSubmit = async () => {
-    const response = await fetch("http://127.0.0.1:5000/reserve_slot", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        time: new Date(
-          startDate.getFullYear(),
-          startDate.getMonth(),
-          startDate.getDate(),
-          startTime.getHours() + 3,
-          startTime.getMinutes()
-        ).toISOString(),
-        userid: userId,
-      }),
-    });
+    const response = await fetch(
+      "http://www.epharmac.store:8081/reserve_slot",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          time: new Date(
+            startDate.getFullYear(),
+            startDate.getMonth(),
+            startDate.getDate(),
+            startTime.getHours() + 3,
+            startTime.getMinutes()
+          ).toISOString(),
+          userid: userId,
+        }),
+      }
+    );
 
     const data = await response.json();
 

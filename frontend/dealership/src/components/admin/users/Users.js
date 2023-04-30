@@ -6,7 +6,7 @@ function Users() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:5000/users", {
+      const response = await fetch("http://www.epharmac.store:8081/users", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

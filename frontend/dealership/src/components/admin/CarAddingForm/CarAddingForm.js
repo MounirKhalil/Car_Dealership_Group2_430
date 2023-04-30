@@ -22,7 +22,7 @@ function CarAddingForm(props) {
 
   // A function to handle the form submit event
   const handleSubmit = () => {
-    fetch("http://127.0.0.1:5000/addcars", {
+    fetch("http://www.epharmac.store:8081/addcars", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

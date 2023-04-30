@@ -3,47 +3,55 @@ from flask_pymongo import PyMongo
 import bcrypt
 import jwt
 from datetime import datetime, timedelta
-from dotenv import load_dotenv
 import os
 import re
 from flask_cors import CORS, cross_origin
 from bson import ObjectId, json_util
 import json
 from flask_mail import Mail, Message
+from waitress import serve
 
-
-
-load_dotenv()
+# Define environment variables
+MONGO_URI = "mongodb+srv://car_dealer:qWWVneQznCWRirGx@cluster0.laajaef.mongodb.net/website_data?retryWrites=true&w=majority"
+SECRET_KEY = "2b5fbd0da3dc1a3332a02c10651f978d"
+EMAIL_USERNAME = "carandgoleb@outlook.com"
+EMAIL_PASSWORD = "carandgo123@"
+EMAIL_SERVER = "smtp.office365.com"
+EMAIL_PORT = 587
 
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'website_data'
-app.config['MONGO_URI'] = os.getenv('MONGO_URI')
+app.config['MONGO_URI'] = MONGO_URI
 CORS(app)
 
-app.config['MAIL_SERVER'] = os.getenv('EMAIL_SERVER')
-app.config['MAIL_PORT'] = os.getenv('EMAIL_PORT')
-app.config['MAIL_USERNAME'] = os.getenv('EMAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.getenv('EMAIL_PASSWORD')
+app.config['MAIL_SERVER'] = EMAIL_SERVER
+app.config['MAIL_PORT'] = EMAIL_PORT
+app.config['MAIL_USERNAME'] = EMAIL_USERNAME
+app.config['MAIL_PASSWORD'] = EMAIL_PASSWORD
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 
-mail=Mail(app)
+mail = Mail(app)
 
 mongo = PyMongo(app)
+
 
 ####################################################################
 ################  SIGN IN AND SIGN UP SECTION ######################
 ####################################################################
 
+
 def send_email(recipients, subject, body):
     try:
-        msg = Message(subject, sender=os.getenv('EMAIL_USERNAME'), recipients=[recipients])
+        msg = Message(subject, sender=os.getenv(
+            'EMAIL_USERNAME'), recipients=[recipients])
         msg.body = body
         mail.send(msg)
     except Exception as e:
         return str(e)
-     
+
+
 @app.route('/signin', methods=['POST'])
 def sign_in():
     """
@@ -277,5 +285,5 @@ def slot_by_id(user_id):
     return json.loads(json_util.dumps(timeslot))
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "_main_":
+    serve(app, host='0.0.0.0', port=5000, url_scheme='https')

@@ -15,19 +15,17 @@ const SignUp = () => {
   const [captchaValue, setCaptchaValue] = useState("");
   const [captchaValid, setCaptchaValid] = useState(false);
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!captchaValid) {
       alert("Incorrect code. Please try again.");
       return;
-    }
-    else {
+    } else {
       if (password !== confirmPassword) {
         alert("Passwords do not match");
       } else {
-        const response = await fetch("http://127.0.0.1:5000/signup", {
+        const response = await fetch("http://www.epharmac.store:8081/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -57,7 +55,6 @@ const SignUp = () => {
   };
 
   const generateCaptcha = () => {
-    
     const captcha = uuidv4().slice(0, 6); // Generate a random string of 6 characters
     setCaptcha(captcha);
   };
@@ -151,9 +148,7 @@ const SignUp = () => {
               placeholder="Enter the code"
               value={captchaValue}
               onChange={handleCaptchaChange}
-              
             />
-
           </div>
           <div className="form-group"></div>
           <button className="btn-submit" type="submit">
