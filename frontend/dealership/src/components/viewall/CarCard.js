@@ -10,16 +10,6 @@ const CarCard = ({ car, onClick }) => {
     backgroundColor: isClicked ? "lightgrey" : "white",
   };
   return (
-    /*
-    <div className="car-card">
-      <img src={car.image} alt={`${car.make} ${car.model}`} />
-      <h2>{`${car.make} ${car.model}`}</h2>
-      <p>{`Year: ${car.year}`}</p>
-      <p>{`Price: $${car.price}`}</p>
-      <button className="test-drive-btn">Request Test Drive</button>
-    </div>
-    */
-
     <div
       class="box-wrapper"
       onClick={() => {
@@ -41,7 +31,7 @@ const CarCard = ({ car, onClick }) => {
         </a>
         <div class="title">{`${car.make} ${car.model}`}</div>
         <div class="desc">{`Year: ${car.year}`}</div>
-        <span class="price">{`Price: ${car.price}`}</span>
+        <span class="price">{`Price: $${car.price}`}</span>
         <div class="footer"></div>
       </div>
     </div>

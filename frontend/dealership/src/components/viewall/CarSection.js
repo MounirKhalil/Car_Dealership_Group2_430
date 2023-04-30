@@ -44,14 +44,27 @@ function CarSection() {
 
   useEffect(() => {
     function filterCars() {
-      const filtered = cars.filter(async (car) => {
-        console.log(car);
-        return (
-          car.make.includes(makeFilter) &&
-          car.price >= minPriceFilter &&
-          car.price <= maxPriceFilter &&
-          car.model.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+      let filtered = cars.filter((car) => {
+        // Apply make filter
+        if (makeFilter && makeFilter !== "" && car.make !== makeFilter) {
+          return false;
+        }
+        // Apply price filters
+        if (
+          car.price < parseInt(minPriceFilter) ||
+          car.price > parseInt(maxPriceFilter)
+        ) {
+          return false;
+        }
+        // Apply search term filter
+        if (
+          searchTerm &&
+          searchTerm !== "" &&
+          !car.model.toLowerCase().includes(searchTerm.toLowerCase())
+        ) {
+          return false;
+        }
+        return true;
       });
       setFilteredCars(filtered);
     }
@@ -173,6 +186,21 @@ function CarSection() {
             <option value="Toyota">Toyota</option>
             <option value="Honda">Honda</option>
             <option value="Ford">Ford</option>
+            <option value="Tesla">Tesla</option>
+            <option value="Nissan">Nissan</option>
+            <option value="BMW">BMW</option>
+            <option value="Audi">Audi</option>
+            <option value="Jeep">Jeep</option>
+            <option value="Dodge">Dodge</option>
+            <option value="Lexus">Lexus</option>
+            <option value="Infiniti">Infiniti</option>
+            <option value="Subaru">Subaru</option>
+            <option value="Mazda">Mazda</option>
+            <option value="Volvo">Volvo</option>
+            <option value="Kia">Kia</option>
+            <option value="Hyundai">Hyundai</option>
+            <option value="Jaguar">Jaguar</option>
+            <option value="Mercedes-Benz">Mercedes-Benz</option>
           </select>
           <select
             className="Filter"

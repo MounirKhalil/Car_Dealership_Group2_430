@@ -156,7 +156,7 @@ const SwitchingFlashcards = ({ car }) => {
             <p>PRICE USD</p>
           </div>
           <div className="card-text-2-b">
-            <p>{car.price}</p>
+            <p>${car.price}</p>
           </div>
         </div>
       </div>
