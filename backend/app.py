@@ -9,29 +9,11 @@ import re
 from flask_cors import CORS, cross_origin
 from bson import ObjectId, json_util
 import json
-
-import smtplib
-from email.message import EmailMessage
+from flask_mail import Mail, Message
 
 
-def send_email(user_email, subject, message):
-    try:
-        email = EmailMessage()
-        email.set_content(message)
-        email["Subject"] = subject
-        email["From"] = os.getenv("EMAIL_USERNAME")
-        email["To"] = user_email
 
-        with smtplib.SMTP_SSL(os.getenv("EMAIL_SERVER"), os.getenv("EMAIL_PORT")) as server:
-            server.login(os.getenv("EMAIL_USERNAME"),
-                         os.getenv("EMAIL_PASSWORD"))
-            server.send_message(email)
 
-        return True
-    except Exception as e:
-        print(f"Error sending email: {e}")
-
-        return False
 
 
 load_dotenv()
@@ -42,13 +24,29 @@ app.config['MONGO_DBNAME'] = 'website_data'
 app.config['MONGO_URI'] = os.getenv('MONGO_URI')
 CORS(app)
 
+app.config['MAIL_SERVER'] = os.getenv('EMAIL_SERVER')
+app.config['MAIL_PORT'] = os.getenv('EMAIL_PORT')
+app.config['MAIL_USERNAME'] = os.getenv('EMAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('EMAIL_PASSWORD')
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+
+mail=Mail(app)
+
 mongo = PyMongo(app)
 
 ####################################################################
 ################  SIGN IN AND SIGN UP SECTION ######################
 ####################################################################
 
-
+def send_email(recipients, subject, body):
+    try:
+        msg = Message(subject, sender=os.getenv('EMAIL_USERNAME'), recipients=[recipients])
+        msg.body = body
+        mail.send(msg)
+    except Exception as e:
+        return str(e)
+     
 @app.route('/signin', methods=['POST'])
 def sign_in():
     """
@@ -128,6 +126,10 @@ def sign_up():
 
     # Hash the password and insert user into the database
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    user_email = email
+    subject = "Welcome to Our Website"
+    message = f"Dear {first_name} {last_name},\n\nThank you for signing up on our website. We are glad to have you on board!\n\nBest regards,\nThe Website Team"
+    send_email(user_email, subject, message)
     users_collection.insert_one({
         'first_name': first_name,
         'last_name': last_name,
@@ -136,11 +138,6 @@ def sign_up():
         'mobile': mobile,
         'admin': admin
     })
-
-    user_email = email
-    subject = "Welcome to Our Website"
-    message = f"Dear {first_name} {last_name},\n\nThank you for signing up on our website. We are glad to have you on board!\n\nBest regards,\nThe Website Team"
-    send_email(user_email, subject, message)
 
     return jsonify({'success': True})
 
