@@ -1,0 +1,54 @@
+.CarDetailsContainer0 {
+  align-items: center;
+  height: 100vh;
+  width: 99.5vw;
+  background-color: whitesmoke;
+}
+
+
+.CarDetailsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 99.5vw;
+  background-color: whitesmoke;
+}
+
+.CarHero {
+  justify-content: center;
+  /* align-items: center; */
+  flex: 0.5;
+  padding-left: 5vw;
+  bottom: 500vh;
+}
+
+.CarHeroImage {
+  justify-content: center;
+  align-items: center;
+  flex: 0.5;
+  height: 50vh;
+}
+
+.CarInfoSection1 {
+  flex: 0.5;
+  display: flex;
+  align-items: left;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.CarInfoSection2 {
+  padding-left: 31vw;
+  background-color: #2196f5;
+  margin-top: -3vh;
+}
+
+.CarInfoSection2 h3 {
+  font-size: 55px;
+  text-align: left;
+  justify-content: left;
+  color: whitesmoke;
+}
+
+
+

@@ -1,4 +1,10 @@
 Flask
-flask-pymongo
 bcrypt
-jwt
+click
+dotenv
+itsdangerous
+Jinja2
+pyjwt
+MarkupSafe
+PyMongo
+Werkzeug

@@ -1,0 +1,90 @@
+.SearchBar {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70vw;
+  background-color: white;
+  border-radius: 1% / 20%;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  height: 5vw;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.SearchBar p {
+  font-size: 5vw;
+}
+.SearchInput {
+  height: 3vw;
+  width: 15vw;
+  font-size: 1.5vw;
+  border: none;
+  margin-left: 6px;
+}
+
+.SearchInput:focus {
+  outline: none;
+}
+
+#SearchButton {
+  padding: 0;
+  font-size: 1.25vw;
+  font-weight: bold;
+  text-transform: none;
+  background-color: #2196f5;
+  background: #2196f5;
+  border: 1px solid #2196f5;
+  border-radius: 7.5% / 30%;
+  color: #fff;
+  width: 12vw;
+  height: 2.5vw;
+}
+
+#SearchButton:active {
+  transform: scale(0.95);
+}
+
+.Filter {
+  text-align: center;
+  font-size: 1.1vw;
+  width: 12vw;
+  padding: 0.5em 1em;
+  border: 1px solid #ccc;
+  border-radius: 0.25em;
+  appearance: none;
+  background-color: white;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ccc" d="M20.7 8.3c-.4-.4-1-.4-1.4 0L12 15.6 4.7 8.3c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4l8 8c.2.2.5.3.7.3s.5-.1.7-.3l8-8c.4-.4.4-1 0-1.4z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.5em center;
+  background-size: 1em;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.grid-container {
+  width: 80vw;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px; /* gap between grid items */
+  list-style: none; /* remove bullet points */
+  padding: 0;
+  margin: 0 auto;
+}
+
+.grid-item {
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+
+@media only screen and (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
