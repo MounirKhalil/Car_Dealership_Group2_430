@@ -43,7 +43,7 @@ function App() {
       <Routes>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/admin" element={<AdminPanel />} />
+        /*<Route path="/admin" element={<AdminPanel />} /> 
         <Route path="/ViewCars" element={<CarSection />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/" element={<Landing />} />

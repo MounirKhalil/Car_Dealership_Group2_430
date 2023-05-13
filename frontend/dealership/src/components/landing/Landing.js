@@ -19,6 +19,7 @@ import hour from "../../img/hour.png";
 import phone from "../../img/phone.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBriefcase } from "@fortawesome/free-solid-svg-icons";
+import SliderBrands from "./slider/SliderBrands";
 
 function Landing() {
   const testimonials = [
@@ -49,72 +50,10 @@ function Landing() {
           <img id="hero-image" src={hero_section_img} alt="Hero Section Car" />
         </section>
 
-        <div>
-          <div className="slids-container">
-            <div className="car-brands">
-              <section className="banner">
-                <article className="slides">
-                  <div className="slide">
-                    <ul className="images">
-                      <li>
-                        <img src={brand1} className="image" />
-                      </li>
-                      <li>
-                        <img src={brand2} className="image" />
-                      </li>
-                      <li>
-                        <img src={brand3} className="image" />
-                      </li>
-                      <li>
-                        <img src={brand4} className="image" />
-                      </li>
-                      <li>
-                        <img src={brand5} className="image" />
-                      </li>
-                      <li>
-                        <img src={brand6} className="image" />
-                      </li>
-                      <li>
-                        <img src={brand7} className="image" />
-                      </li>
-                      <li>
-                        <img src={brand8} className="image" />
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="slide">
-                    <ul className="images">
-                      <li>
-                        <img src={brand1} className="image" />
-                      </li>
-                      <li>
-                        <img src={brand2} className="image" />
-                      </li>
-                      <li>
-                        <img src={brand3} className="image" />
-                      </li>
-                      <li>
-                        <img src={brand4} className="image" />
-                      </li>
-                      <li>
-                        <img src={brand5} className="image" />
-                      </li>
-                      <li>
-                        <img src={brand6} className="image" />
-                      </li>
-                      <li>
-                        <img src={brand7} className="image" />
-                      </li>
-                      <li>
-                        <img src={brand8} className="image" />
-                      </li>
-                    </ul>
-                  </div>
-                </article>
-              </section>
-            </div>
-          </div>
+        <div className="SliderSection">
+        <SliderBrands/>
         </div>
+        
         <section className="features">
           <div className="feature">
             <h3>Large Inventory</h3>
