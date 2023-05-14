@@ -13,7 +13,7 @@ class SignUpTestCase(unittest.TestCase):
 
     def test_sign_up_success(self):
         with patch('app.mongo.db.users') as mock_users_collection:
-            # Mock the find_one method to return None, indicating user does not exist
+        
             mock_users_collection.find_one.return_value = None
 
             data = {
@@ -29,7 +29,6 @@ class SignUpTestCase(unittest.TestCase):
 
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.get_json(), {'success': True})
-            # Verify that the insert_one method was called once
             mock_users_collection.insert_one.assert_called_once()
 
     def test_sign_up_existing_user(self):
@@ -52,7 +51,6 @@ class SignUpTestCase(unittest.TestCase):
 
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response.get_json(), {'error': 'User already exists'})
-            # Verify that the insert_one method was not called
             mock_users_collection.insert_one.assert_not_called()
 
 
