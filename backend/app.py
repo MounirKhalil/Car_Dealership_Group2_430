@@ -10,25 +10,22 @@ from bson import ObjectId, json_util
 import json
 from flask_mail import Mail, Message
 from waitress import serve
+from dotenv import load_dotenv
 
-# Define environment variables
-MONGO_URI = "mongodb+srv://car_dealer:qWWVneQznCWRirGx@cluster0.laajaef.mongodb.net/website_data?retryWrites=true&w=majority"
-SECRET_KEY = "2b5fbd0da3dc1a3332a02c10651f978d"
-EMAIL_USERNAME = "carandgoleb@outlook.com"
-EMAIL_PASSWORD = "carandgo123@"
-EMAIL_SERVER = "smtp.office365.com"
-EMAIL_PORT = 587
+
 
 app = Flask(__name__)
 
+load_dotenv()
+
 app.config['MONGO_DBNAME'] = 'website_data'
-app.config['MONGO_URI'] = MONGO_URI
+app.config['MONGO_URI'] = os.environ.get('MONGO_URI')
 CORS(app)
 
-app.config['MAIL_SERVER'] = EMAIL_SERVER
-app.config['MAIL_PORT'] = EMAIL_PORT
-app.config['MAIL_USERNAME'] = EMAIL_USERNAME
-app.config['MAIL_PASSWORD'] = EMAIL_PASSWORD
+app.config['MAIL_SERVER'] = os.environ.get('EMAIL_SERVER')
+app.config['MAIL_PORT'] = os.environ.get('EMAIL_PORT')
+app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASSWORD')
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 
@@ -44,7 +41,7 @@ mongo = PyMongo(app)
 
 def send_email(recipients, subject, body):
     try:
-        msg = Message(subject, sender=os.getenv(
+        msg = Message(subject, sender=os.environ.get(
             'EMAIL_USERNAME'), recipients=[recipients])
         msg.body = body
         mail.send(msg)
@@ -72,13 +69,13 @@ def sign_in():
                 token = jwt.encode({
                     'user': email,
                     'exp': datetime.utcnow() + timedelta(minutes=30)
-                }, os.getenv('SECRET_KEY'))
+                }, str(os.environ.get('SECRET_KEY')))
                 return jsonify({'id':  str(user['_id']), 'token': token, 'admin': True, 'success': True})
             else:
                 token = jwt.encode({
                     'user': email,
                     'exp': datetime.utcnow() + timedelta(minutes=30)
-                }, os.getenv('SECRET_KEY'))
+                }, os.environ.get('SECRET_KEY'))
                 return jsonify({'id':  str(user['_id']), 'token': token, 'admin': False, 'success': True})
         else:
             return jsonify({'error': 'Invalid username or password'})
@@ -284,6 +281,6 @@ def slot_by_id(user_id):
         return "no test drive"
     return json.loads(json_util.dumps(timeslot))
 
-
 if __name__ == "_main_":
-    serve(app, host='0.0.0.0', port=5000, url_scheme='https')
+    app.run()
+
