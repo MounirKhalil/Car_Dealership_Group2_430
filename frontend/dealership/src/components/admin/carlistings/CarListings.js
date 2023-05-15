@@ -5,7 +5,7 @@ function CarListing() {
   const [cars, setCars] = useState([]);
   const fetchCars = async () => {
     try {
-      const response = await fetch("http://www.epharmac.store:8081/cars", {
+      const response = await fetch("https://ahm42cargo-service.azurewebsites.net/cars", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +27,7 @@ function CarListing() {
   const handleDelete = (id) => {
     (async () => {
       // DELETE request using fetch with async/await
-      await fetch(`http://www.epharmac.store:8081/delete_car/${id}`, {
+      await fetch(`https://ahm42cargo-service.azurewebsites.net/delete_car/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

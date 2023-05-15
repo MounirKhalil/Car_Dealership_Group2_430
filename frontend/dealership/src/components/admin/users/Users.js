@@ -6,7 +6,7 @@ function Users() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("http://www.epharmac.store:8081/users", {
+      const response = await fetch("https://ahm42cargo-service.azurewebsites.net/users", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

@@ -25,7 +25,7 @@ function Profile() {
 
       const getUserData = async () => {
         const response = await fetch(
-          `http://www.epharmac.store:8081/user/${userId}`,
+          `https://ahm42cargo-service.azurewebsites.net/user/${userId}`,
           {
             method: "GET",
             headers: {
@@ -46,7 +46,7 @@ function Profile() {
 
       const getTimeSlot = async () => {
         const response = await fetch(
-          `http://www.epharmac.store:8081/slot_by_id/${userId}`,
+          `https://ahm42cargo-service.azurewebsites.net/slot_by_id/${userId}`,
           {
             method: "GET",
             headers: {
@@ -68,7 +68,7 @@ function Profile() {
     const userId = tokenData.id;
     try {
       const response = await fetch(
-        `http://www.epharmac.store:8081/delete_timeslot/${userId}`,
+        `https://ahm42cargo-service.azurewebsites.net/delete_timeslot/${userId}`,
         {
           method: "DELETE",
           headers: {

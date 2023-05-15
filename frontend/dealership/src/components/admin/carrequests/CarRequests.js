@@ -6,7 +6,7 @@ function CarRequests() {
   const fetchSlots = async () => {
     try {
       const response = await fetch(
-        "http://www.epharmac.store:8081/get_reserved_slots",
+        "https://ahm42cargo-service.azurewebsites.net/get_reserved_slots",
         {
           method: "GET",
           headers: {
@@ -50,7 +50,7 @@ function CarRequests() {
   const handleDelete = (id) => {
     (async () => {
       // DELETE request using fetch with async/await
-      await fetch(`http://www.epharmac.store:8081/delete_timeslot/${id}`, {
+      await fetch(`https://ahm42cargo-service.azurewebsites.net/delete_timeslot/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

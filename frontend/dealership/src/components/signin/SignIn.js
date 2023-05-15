@@ -20,7 +20,7 @@ function SignIn() {
   const handleSubmit1 = async (event) => {
     event.preventDefault();
 
-    const response = await fetch("http://www.epharmac.store:8081/signin", {
+    const response = await fetch("https://ahm42cargo-service.azurewebsites.net/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ function SignIn() {
   const handleSubmit2 = async (event) => {
     event.preventDefault();
 
-    const response = await fetch("http://www.epharmac.store:8081/signin", {
+    const response = await fetch("https://ahm42cargo-service.azurewebsites.net/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

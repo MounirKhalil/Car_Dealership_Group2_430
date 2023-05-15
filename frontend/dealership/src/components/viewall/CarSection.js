@@ -24,7 +24,7 @@ function CarSection() {
 
   const fetchCars = async () => {
     try {
-      const response = await fetch("http://www.epharmac.store:8081/cars", {
+      const response = await fetch("https://ahm42cargo-service.azurewebsites.net/cars", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -144,7 +144,7 @@ function CarSection() {
     const fetchCar = async (CarId) => {
       try {
         const response = await fetch(
-          `http://www.epharmac.store:8081/car/${CarId}`,
+          `https://ahm42cargo-service.azurewebsites.net/car/${CarId}`,
           {
             method: "GET",
             headers: {

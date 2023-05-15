@@ -21,7 +21,7 @@ const TestDriveBooking = () => {
   useEffect(() => {
     const getTimeSlot = async () => {
       const response = await fetch(
-        "http://www.epharmac.store:8081/get_reserved_slots",
+        "https://ahm42cargo-service.azurewebsites.net/get_reserved_slots",
         {
           method: "GET",
           headers: {

@@ -25,7 +25,7 @@ const SignUp = () => {
       if (password !== confirmPassword) {
         alert("Passwords do not match");
       } else {
-        const response = await fetch("http://www.epharmac.store:8081/signup", {
+        const response = await fetch("https://ahm42cargo-service.azurewebsites.net/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

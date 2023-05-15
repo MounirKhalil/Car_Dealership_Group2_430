@@ -22,7 +22,7 @@ function CarAddingForm(props) {
 
   // A function to handle the form submit event
   const handleSubmit = () => {
-    fetch("http://www.epharmac.store:8081/addcars", {
+    fetch("https://ahm42cargo-service.azurewebsites.net/addcars", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

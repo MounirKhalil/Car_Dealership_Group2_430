@@ -22,7 +22,7 @@ const CarDetails = ({ my_car }) => {
       const userId = tokenData.id;
       const getTimeSlot = async () => {
         const response = await fetch(
-          `http://www.epharmac.store:8081/slot_by_id/${userId}`,
+          `https://ahm42cargo-service.azurewebsites.net/slot_by_id/${userId}`,
           {
             method: "GET",
             headers: {
