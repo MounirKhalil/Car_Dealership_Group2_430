@@ -211,11 +211,14 @@ def delete_car(car_id):
 
 @app.route('/car/<car_id>', methods=['GET'])
 def get_car_info(car_id):
-    car = mongo.db.cars.find_one({'_id': ObjectId(car_id)})
-    car['_id'] = str(car['_id'])
-    if not car:
-        return jsonify({'error': 'Car not found'})
-    return jsonify(car)
+    try:
+        car = mongo.db.cars.find_one({'_id': ObjectId(car_id)})
+        if car is None:
+            return jsonify({'error': 'Car not found'})
+        car['_id'] = str(car['_id'])
+        return jsonify(car)
+    except:
+        return jsonify({'error': 'Invalid car ID'})
 
 ####################################################################
 ######################### TIMESLOT SECTION #########################
