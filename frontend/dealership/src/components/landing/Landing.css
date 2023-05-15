@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-x: hidden;
 }
 
 main {
@@ -14,8 +15,9 @@ main {
   align-items: center;
 }
 
-.SliderSection{
-  width:100vw;
+.SliderSection {
+  margin-bottom: 15px;
+  width: 100vw;
 }
 .hero {
   height: 65vh;
@@ -74,7 +76,6 @@ main {
   color: #2196f5;
   font-size: larger;
 }
-
 
 .images {
   display: flex;

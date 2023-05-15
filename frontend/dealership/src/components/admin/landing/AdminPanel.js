@@ -3,7 +3,7 @@ import "./AdminPanel.css";
 import Users from "../users/Users";
 import CarListings from "../carlistings/CarListings";
 import CarRequests from "../carrequests/CarRequests";
-import CarAddingForm from "../CarAddingForm/CarAddingForm";
+import CarAddingForm from "../caraddingform/CarAddingForm";
 
 const AdminPanel = () => {
   const [showUsers, setShowUsers] = useState(false);
