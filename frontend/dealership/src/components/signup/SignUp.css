@@ -74,7 +74,7 @@ label {
 }
 
 .captcha-text {
-  text-shadow: 0 0 5px rgba(0,0,0,0.5);
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   font-size: 1.2em;
   letter-spacing: 5px;
   user-select: none;
@@ -83,7 +83,7 @@ label {
 
 .refresh-button {
   border: none;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: #fff;
   padding: 8px 16px;
   font-size: 16px;
@@ -94,4 +94,38 @@ label {
 
 .refresh-button:hover {
   background-color: #3e8e41;
+}
+
+@media (max-width: 1000px) {
+  .wrapper {
+    width: 95vw;
+  }
+
+  .header2 {
+    font-size: 1.4rem;
+  }
+
+  label {
+    font-size: 1rem;
+  }
+
+  .signup-input {
+    font-size: 0.9rem;
+  }
+
+  .btn-submit {
+    font-size: 0.9rem;
+  }
+
+  .captcha-container {
+    font-size: 14px;
+  }
+
+  .captcha-text {
+    font-size: 0.9rem;
+  }
+
+  .refresh-button {
+    font-size: 12px;
+  }
 }

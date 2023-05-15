@@ -5,7 +5,6 @@
   background-color: whitesmoke;
 }
 
-
 .CarDetailsContainer {
   display: flex;
   flex-direction: row;
@@ -50,5 +49,36 @@
   color: whitesmoke;
 }
 
+/* Media Query for screens with a maximum width of 1000px */
+@media (max-width: 1000px) {
+  .CarDetailsContainer {
+    flex-direction: column;
+  }
 
+  .CarHero {
+    padding: 0;
+  }
+  .CarDetailsContainer0 {
+    height: 50vh;
+  }
 
+  .CarHeroImage {
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .CarInfoSection1 {
+    display: none;
+  }
+
+  .CarInfoSection2 {
+    padding: 2vh;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .CarInfoSection2 h3 {
+    font-size: 30px;
+  }
+}

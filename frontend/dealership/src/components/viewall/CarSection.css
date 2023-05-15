@@ -77,14 +77,50 @@
   border-radius: 5px;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1500px) {
   .grid-container {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 1000px) {
   .grid-container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width: 1000px) {
+  .SearchBar {
+    width: 90vw;
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .SearchInput {
+    width: 100%;
+    max-width: none;
+    margin-bottom: 10px;
+    font-size: 4vw;
+  }
+
+  .Filters {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .Filter {
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 4vw;
+  }
+
+  .CompareButton {
+    width: 100%;
+    margin-top: 10px;
   }
 }

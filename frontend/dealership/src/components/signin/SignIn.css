@@ -51,6 +51,29 @@ a {
   min-height: 480px;
 }
 
+@media (max-width: 1000px) {
+  .container {
+    width: 90vw;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 12px;
+    line-height: 18px;
+    margin: 15px 0 25px;
+  }
+
+  span {
+    font-size: 10px;
+  }
+
+  a {
+    font-size: 12px;
+  }
+}
 .form {
   background: #fff;
   display: flex;

@@ -121,3 +121,59 @@
   position: relative;
   top: 15%;
 }
+
+@media (max-width: 1000px) {
+  .box-wrapper {
+    width: 100%;
+    height: auto;
+    margin: 10px 0;
+  }
+
+  .box-wrapper img {
+    width: 100%;
+    height: auto;
+  }
+
+  .title {
+    font-size: 1.5em;
+  }
+
+  .desc {
+    font-size: 1em;
+  }
+
+  .box-content:before {
+    top: -30px;
+  }
+
+  .box-content .buy {
+    top: -50px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .box-content .buy span {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    left: 105%;
+  }
+
+  .box-content .price {
+    font-size: 1.5em;
+    margin-top: 10px;
+  }
+
+  .box-content .price:before,
+  .box-content .price:after {
+    width: 30px;
+    top: 12px;
+  }
+
+  .img-arrow {
+    left: 5%;
+    width: 90%;
+    top: 10%;
+  }
+}

@@ -3,10 +3,13 @@ import "./CarSection.css";
 import CarCard from "./CarCard";
 import CompareTwoCars from "./comparetwocars/CompareTwoCars";
 import CarDetails from "./cardetails/CarDetails";
+import { useNavigate } from "react-router-dom";
 
 import Modal from "react-modal";
 
 function CarSection() {
+  const history = useNavigate();
+
   const [cars, setCars] = useState([]);
 
   const [filteredCars, setFilteredCars] = useState([]);
@@ -24,12 +27,15 @@ function CarSection() {
 
   const fetchCars = async () => {
     try {
-      const response = await fetch("https://ahm42cargo-service.azurewebsites.net/cars", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://ahm42cargo-service.azurewebsites.net/cars",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await response.json();
 
       setCars(data);
@@ -122,7 +128,7 @@ function CarSection() {
 
   const handleCloseModal = () => {
     setShowModal(false);
-    window.location.reload();
+    history("/"); // Navigate to the same page
   };
 
   useEffect(() => {
