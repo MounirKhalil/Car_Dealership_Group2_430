@@ -2,14 +2,7 @@
 
 A car dealership website featuring a user interface for viewing and renting cars, booking of test drives, and an admin panel.
 
-## To do in readme:
 
-1. create table of contents
-2. add library requirements with versions
-3. flush out pages descriptions
-4. add features in functionality
-5. add license mit
-<hr>
 
 ## Getting Started
 
